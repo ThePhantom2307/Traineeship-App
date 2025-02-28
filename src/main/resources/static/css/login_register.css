@@ -40,12 +40,27 @@ h2 {
     margin-bottom: 5px;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     width: calc(100% - 16px); /* Makes sure input fields align with buttons */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+/* Additional Dropdown Styling */
+.input-group select {
+    background: #fff;
+    color: #333;
+    /* Remove default arrow and add custom one */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"%3E%3Cpath fill="%23333" d="M7 8L0 0h14z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
 }
 
 /* Buttons */
@@ -67,18 +82,18 @@ h2 {
 }
 
 /* Error & Success Messages */
-.error-message, .success-message {
+.errorMessage, .successMessage {
     text-align: center;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.error-message {
-    color: #ff4d4d;
+.errorMessage {
+    color: #ff7e75;
 }
 
-.success-message {
-    color: #4caf50;
+.successMessage {
+    color: #75ff91;
 }
 
 /* Form Footer (Register/Login Link) */

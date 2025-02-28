@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Main Page</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <h1 th:text="${title}">Main Page</h1>
+    <p th:text="${message}">Welcome message</p>
+
+    <div>
+        <a th:href="@{/login}" class="btn btn-primary">Login</a>
+        <a th:href="@{/register}" class="btn btn-secondary">Register</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Traineeship App</p>
+    </footer>
+</body>
+</html>
