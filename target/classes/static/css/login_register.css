@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container */
+.form-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left; /* Aligns form elements properly */
+}
+
+/* Form Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    width: calc(100% - 16px); /* Makes sure input fields align with buttons */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Additional Dropdown Styling */
+.input-group select {
+    background: #fff;
+    color: #333;
+    /* Remove default arrow and add custom one */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"%3E%3Cpath fill="%23333" d="M7 8L0 0h14z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #218838; /* Darker Green */
+}
+
+/* Error & Success Messages */
+.errorMessage, .successMessage {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.errorMessage {
+    color: #ff7e75;
+}
+
+.successMessage {
+    color: #75ff91;
+}
+
+/* Form Footer (Register/Login Link) */
+.form-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-footer a {
+    color: #f1c40f;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
