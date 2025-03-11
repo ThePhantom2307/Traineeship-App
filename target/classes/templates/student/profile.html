@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Student Profile</title>
+</head>
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Student Profile</p>
+        <form action="#" th:action="@{/student/save_profile}" th:object="${profile}" method="POST">
+            <input type="hidden" th:field="*{userID}" />
+
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" th:field="*{fullname}" class="form-control mb-4 col-4" required/> 
+
+            <label for="universityID">University ID number</label>
+            <input type="text" id="universityID" th:field="*{universityID}" class="form-control mb-4 col-4" required/>
+
+            <label for="interests">Interests (Separated with comma)</label>       
+            <input type="text" id="interests" th:field="*{interests}" class="form-control mb-4 col-4" required/>
+
+            <label for="skills">Skills (Separated with comma)</label>       
+            <input type="text" id="skills" th:field="*{skills}" class="form-control mb-4 col-4" required/>
+
+            <label for="preferredLocation">Preferred Location</label>       
+            <input type="text" id="preferredLocation" th:field="*{preferredLocation}" class="form-control mb-4 col-4" required/>
+
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+            <a th:href="@{/student/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+        </form>
+    </div>
+</body>
+</html>
