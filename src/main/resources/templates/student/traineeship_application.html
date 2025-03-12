@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Student Application</title>
+</head>
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Student Application</p>
+        <form action="#" th:action="@{/student/save_application}" th:object="${application}" method="POST">
+            
+        </form>
+    </div>
+</body>
+</html>
