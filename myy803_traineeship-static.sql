@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL
+    role ENUM('STUDENT', 'COMPANY', 'PROFESSOR', "TRAINEESHIP_COMMITTEE_MEMBER")
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- Table: students
@@ -78,90 +78,11 @@ CREATE TABLE IF NOT EXISTS professor_interests (
     FOREIGN KEY (interest_id) REFERENCES interests(interest_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Table: traineeship_positions
-CREATE TABLE IF NOT EXISTS traineeship_positions (
-    position_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    company_id INT NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    description TEXT,
-    status ENUM('available', 'assigned', 'closed') DEFAULT 'available',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: traineeship_position_skills
-CREATE TABLE IF NOT EXISTS traineeship_position_skills (
-    position_id INT,
-    skill_id INT,
-    PRIMARY KEY (position_id, skill_id),
-    FOREIGN KEY (position_id) REFERENCES traineeship_positions(position_id) ON DELETE CASCADE,
-    FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: traineeship_position_interests
-CREATE TABLE IF NOT EXISTS traineeship_position_interests (
-    position_id INT,
-    interest_id INT,
-    PRIMARY KEY (position_id, interest_id),
-    FOREIGN KEY (position_id) REFERENCES traineeship_positions(position_id) ON DELETE CASCADE,
-    FOREIGN KEY (interest_id) REFERENCES interests(interest_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- Table: applications
 CREATE TABLE IF NOT EXISTS applications (
     application_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
-    position_id INT NOT NULL,
     application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    FOREIGN KEY (position_id) REFERENCES traineeship_positions(position_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: traineeship_assignments
-CREATE TABLE IF NOT EXISTS traineeship_assignments (
-    assignment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
-    position_id INT NOT NULL,
-    supervisor_id INT DEFAULT NULL,
-    assignment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('in_progress', 'completed') DEFAULT 'in_progress',
-    final_result ENUM('pass', 'fail') DEFAULT NULL,
-    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    FOREIGN KEY (position_id) REFERENCES traineeship_positions(position_id) ON DELETE CASCADE,
-    FOREIGN KEY (supervisor_id) REFERENCES professors(professor_id) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: traineeship_logbook
-CREATE TABLE IF NOT EXISTS traineeship_logbook (
-    log_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    assignment_id INT NOT NULL,
-    log_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    content TEXT,
-    FOREIGN KEY (assignment_id) REFERENCES traineeship_assignments(assignment_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: company_evaluations
-CREATE TABLE IF NOT EXISTS company_evaluations (
-    evaluation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    assignment_id INT NOT NULL,
-    student_motivation TINYINT NOT NULL,
-    effectiveness TINYINT NOT NULL,
-    efficiency TINYINT NOT NULL,
-    evaluation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (assignment_id) REFERENCES traineeship_assignments(assignment_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Table: professor_evaluations
-CREATE TABLE IF NOT EXISTS professor_evaluations (
-    evaluation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    assignment_id INT NOT NULL,
-    student_motivation TINYINT NOT NULL,
-    effectiveness TINYINT NOT NULL,
-    efficiency TINYINT NOT NULL,
-    company_facilities TINYINT NOT NULL,
-    company_guidance TINYINT NOT NULL,
-    evaluation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (assignment_id) REFERENCES traineeship_assignments(assignment_id) ON DELETE CASCADE
+    status ENUM('PENDING', 'ACCEPTED', 'REJECTED') DEFAULT 'PENDING',
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
