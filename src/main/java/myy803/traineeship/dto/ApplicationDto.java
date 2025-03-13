@@ -36,7 +36,13 @@ public class ApplicationDto {
 	}
 	
 	public String getApplicationDate() {
-		return this.applicationDate;
+		String[] applicationDateSplitted = this.applicationDate.split("T");
+		if (applicationDateSplitted.length > 1) {
+			return applicationDateSplitted[0] + " " + applicationDateSplitted[1];
+		} else {
+			return this.applicationDate;
+		}
+		
 	}
 	
 	public LocalDateTime getApplicationDateFormated() {

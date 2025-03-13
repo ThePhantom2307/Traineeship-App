@@ -12,4 +12,5 @@ public interface IntStudentService {
 	ApplicationDto getOrCreateTraineeshipApplicationDto(Integer studentId);
 	Application getOrCreateTraineeshipApplication(ApplicationDto applicationDto);
 	void saveApplication(Application application);
+	Boolean isStudentExists(Integer studentId);
 }

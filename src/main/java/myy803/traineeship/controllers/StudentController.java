@@ -50,8 +50,11 @@ public class StudentController {
 	
 	@PostMapping("/student/save_application")
 	public String saveApplication(@ModelAttribute("profile") ApplicationDto applicationDto) {
-		Application application = studentService.getOrCreateTraineeshipApplication(applicationDto);
-		studentService.saveApplication(application);
-		return "redirect:/student/traineeship_application";
+		if (studentService.isStudentExists(applicationDto.getStudentId())) {
+			Application application = studentService.getOrCreateTraineeshipApplication(applicationDto);
+			studentService.saveApplication(application);
+			return "redirect:/student/traineeship_application";
+		}
+		return "redirect:/student/traineeship_application?error=true";
 	}
 }

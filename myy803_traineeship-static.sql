@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS companies (
 -- Table: professors
 CREATE TABLE IF NOT EXISTS professors (
     professor_id INT PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
+    fullname VARCHAR(255) NOT NULL,
     FOREIGN KEY (professor_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Table: committee_members
 CREATE TABLE IF NOT EXISTS committee_members (
     committee_member_id INT PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
+    fullname VARCHAR(255) NOT NULL,
     FOREIGN KEY (committee_member_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,6 +86,3 @@ CREATE TABLE IF NOT EXISTS applications (
     status ENUM('PENDING', 'ACCEPTED', 'REJECTED') DEFAULT 'PENDING',
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-ALTER TABLE applications MODIFY COLUMN status ENUM('PENDING', 'ACCEPTED', 'REJECTED') NOT NULL DEFAULT 'PENDING';

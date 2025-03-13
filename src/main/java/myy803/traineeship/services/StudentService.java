@@ -48,6 +48,15 @@ public class StudentService implements IntStudentService {
 	}
 	
 	@Override
+	public Boolean isStudentExists(Integer studentId) {
+		Optional<Student> student = studentMapper.findById(studentId);
+		if (student.isPresent()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public StudentDto getOrCreateStudentDto(Integer userId) {
 		Optional<Student> optStudentProfile = studentMapper.findById(userId);
 		StudentDto studentDto;
@@ -99,7 +108,7 @@ public class StudentService implements IntStudentService {
 		return student;
 	}
 	
-	public List<Skill> getOrCreateSkills(List<Skill> skills) {
+	private List<Skill> getOrCreateSkills(List<Skill> skills) {
 	    List<Skill> skillsList = new ArrayList<>();
 
 	    for (Skill skill : skills) {
@@ -111,9 +120,8 @@ public class StudentService implements IntStudentService {
 
 	    return skillsList;
 	}
-
 	
-	public List<Interest> getOrCreateInterests(List<Interest> interests) {
+	private List<Interest> getOrCreateInterests(List<Interest> interests) {
 	    List<Interest> interestsList = new ArrayList<>();
 
 	    for (Interest interest : interests) {

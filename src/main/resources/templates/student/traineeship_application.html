@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <p class="h4 mb-4">Student Traineeship Application</p>
+		<p th:if="${param.error}" class="errorMessage" style="color:red">You have not created a profile!</p>
         <form action="#" th:action="@{/student/save_application}" th:object="${application}" method="POST">
 			<input type="hidden" th:field=*{applicationId} />
 			<input type="hidden" th:field=*{studentId} />

@@ -18,6 +18,8 @@ public class StudentDto {
 	private String skills;
 	private String preferredLocation;
 	
+	public StudentDto() {}
+	
 	public StudentDto(Integer userId, String fullname, String universityId,
 			String interests, String skills, String preferredLocation) {
 		super();
@@ -39,8 +41,6 @@ public class StudentDto {
 		this.setSkills(skills);
 		this.preferredLocation = preferredLocation;
 	}
-	
-	public StudentDto() {}
 
 	public Integer getUserId() {
 		return this.userId;
