@@ -1,7 +1,6 @@
 package myy803.traineeship.model;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -29,7 +28,7 @@ public class Application {
 	public Application(Integer applicationId, Student student, LocalDateTime applicationDate, ApplicationStatus status) {
 		this.applicationId = applicationId;
 		this.student = student;
-		this.applicationDate = applicationDate;
+		this.applicationDate = trimMicroseconds(applicationDate);
 		this.status = status;
 	}
 	
@@ -58,8 +57,12 @@ public class Application {
 	}
 	
 	public void setApplicationDate(LocalDateTime applicationDate) {
-		this.applicationDate = applicationDate;
-	}
+        this.applicationDate = trimMicroseconds(applicationDate);
+    }
+	
+	private LocalDateTime trimMicroseconds(LocalDateTime dateTime) {
+        return dateTime.withNano(0);
+    }
 	
 	public void setStatus(ApplicationStatus status) {
 		this.status = status;

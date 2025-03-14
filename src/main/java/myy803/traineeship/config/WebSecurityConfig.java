@@ -18,6 +18,7 @@ import myy803.traineeship.services.UserService;
 import myy803.traineeship.services.InterestSkillService;
 import myy803.traineeship.services.ProfessorService;
 import myy803.traineeship.services.StudentService;
+import myy803.traineeship.services.TraineeshipCommitteeService;
 
 @Configuration
 @EnableWebSecurity
@@ -43,6 +44,11 @@ public class WebSecurityConfig {
 	@Bean
 	public InterestSkillService interestSkillDetailsService() {
 		return new InterestSkillService();
+	}
+	
+	@Bean
+	public TraineeshipCommitteeService TraineeshipCommitteeDetailsService() {
+		return new TraineeshipCommitteeService();
 	}
 
     @Bean
@@ -90,10 +96,9 @@ public class WebSecurityConfig {
 
                 return http.build();
     }
-    
-    @Bean
+	
+	@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/css/**", "/images/**", "/js/**", "/webjars/**");
     }
-	
 }

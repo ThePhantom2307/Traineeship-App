@@ -13,7 +13,6 @@ public class CompanyController {
 	
 	@RequestMapping("/company/dashboard")
 	public String getStudentMainMenu(){
-	       
-    	return "/company/dashboard";
+    	return "company/dashboard";
     }
 }

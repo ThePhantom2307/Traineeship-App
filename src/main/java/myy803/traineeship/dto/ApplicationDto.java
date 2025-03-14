@@ -13,11 +13,13 @@ public class ApplicationDto {
 	private String applicationDate;
 	private String status;
 	
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy ss:mm:HH");
+	
 	public ApplicationDto() {}
 	
 	public ApplicationDto(Integer studentId, LocalDateTime applicationDate, String status) {
 		this.studentId = studentId;
-		this.applicationDate = applicationDate.toString();
+		this.applicationDate = formatDate(applicationDate);
 		this.status = status;
 	}
 	
@@ -45,17 +47,16 @@ public class ApplicationDto {
 		
 	}
 	
-	public LocalDateTime getApplicationDateFormated() {
-	    if (applicationDate == null || applicationDate.trim().isEmpty()) {
-	        return LocalDateTime.now();
-	    }
-
-	    try {
-	        return LocalDateTime.parse(applicationDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-	    } catch (DateTimeParseException e) {
-	        throw new IllegalArgumentException("Invalid date format: " + applicationDate, e);
-	    }
-	}
+	public LocalDateTime getApplicationDateFormatted() {
+        if (applicationDate == null || applicationDate.trim().isEmpty()) {
+            return LocalDateTime.now();
+        }
+        try {
+            return LocalDateTime.parse(applicationDate, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format: " + applicationDate, e);
+        }
+    }
 	
 	public String getStatus() {
 		return this.status;
@@ -80,4 +81,8 @@ public class ApplicationDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	private String formatDate(LocalDateTime date) {
+        return (date != null) ? date.format(FORMATTER) : null;
+    }
 }

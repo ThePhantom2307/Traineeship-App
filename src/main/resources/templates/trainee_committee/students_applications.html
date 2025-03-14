@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Students Applications</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Students Applications</h2>
+		<br>
+		<a th:href="@{/trainee_committee/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+		<br><br>
+        <div class="table">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Full Name</th>
+						<th>University ID</th>
+						<th>Skills</th>
+                        <th>Interests</th>
+						<th>PreferredLocation</th>
+						<th>Actions</th>
+                    </tr>
+                </thead>
+				<tbody>
+				    <tr th:each="student : ${studentsApplications}">
+				        <td th:text="${student.fullname}"></td>
+				        <td th:text="${student.universityId}"></td>
+				        <td th:utext="${#strings.replace(student.skills, ', ', '<br>')}"></td>
+				        <td th:utext="${#strings.replace(student.interests, ', ', '<br>')}"></td>
+				        <td th:text="${student.preferredLocation}"></td>
+				        <td>
+				            <a th:href="@{/approve?student={id}(id=${student.userId})}" class="btn btn-success">Approve</a>
+							<a th:href="@{/reject(id=${student.userId})}" class="btn btn-danger">Reject</a>
+				        </td>
+				    </tr>
+				</tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

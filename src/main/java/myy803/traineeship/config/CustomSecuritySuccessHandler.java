@@ -41,7 +41,7 @@ public class CustomSecuritySuccessHandler extends SimpleUrlAuthenticationSuccess
 	            targetUrl = "/company/dashboard";
 	            break;
 	        } else if ("TRAINEESHIP_COMMITTEE_MEMBER".equals(role)) {
-	            targetUrl = "/trainee_commitee/dashboard";
+	            targetUrl = "/trainee_committee/dashboard";
 	            break;
 	        }
 	    }

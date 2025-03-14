@@ -22,7 +22,7 @@ public class ProfessorController {
 	
 	@RequestMapping("/professor/dashboard")
 	public String getProfessorMainMenu() {
-    	return "/professor/dashboard";
+    	return "professor/dashboard";
     }
 	
 	@RequestMapping("/professor/profile")

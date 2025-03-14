@@ -40,11 +40,16 @@ public class StudentService implements IntStudentService {
 	
 	@Override
 	public void saveApplication(Application application) {
-		Student student = application.getStudent();
-		Optional<Application> optApplication = applicationMapper.findById(student.getStudentId());
-		if (optApplication.isEmpty()) {
-			applicationMapper.save(application);
-		}
+	    Student student = application.getStudent();
+	    Optional<Application> optApplication = applicationMapper.findById(student.getStudentId());
+	    if (optApplication.isEmpty()) {
+	        applicationMapper.save(application);
+	    } else if (optApplication.get().getStatus().equals(ApplicationStatus.REJECTED)) {
+	        Application existingApplication = optApplication.get();
+	        existingApplication.setApplicationDate(LocalDateTime.now());
+	        existingApplication.setStatus(ApplicationStatus.PENDING);
+	        applicationMapper.save(existingApplication);
+	    }
 	}
 	
 	@Override
@@ -179,8 +184,8 @@ public class StudentService implements IntStudentService {
 	        application.setStatus(ApplicationStatus.PENDING);
 	    }
 
-	    if (applicationDto.getApplicationDateFormated() != null) {
-	        application.setApplicationDate(applicationDto.getApplicationDateFormated());
+	    if (applicationDto.getApplicationDateFormatted() != null) {
+	        application.setApplicationDate(applicationDto.getApplicationDateFormatted());
 	    } else {
 	        application.setApplicationDate(LocalDateTime.now());
 	    }
