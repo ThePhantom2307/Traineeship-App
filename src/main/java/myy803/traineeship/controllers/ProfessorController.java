@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import myy803.traineeship.dto.ProfessorDto;
 import myy803.traineeship.model.Professor;
+import myy803.traineeship.model.User;
 import myy803.traineeship.services.IntProfessorService;
 import myy803.traineeship.services.IntUserService;
 
@@ -27,15 +27,14 @@ public class ProfessorController {
 	
 	@RequestMapping("/professor/profile")
 	public String getProfile(Model model) {
-		Integer userId = userService.authenticateAndGetUserId();
-		ProfessorDto professorDto = professorService.getOrCreateProfessorDto(userId);
-		model.addAttribute("profile", professorDto);
+		User user = userService.authenticateAndGetUser();
+		Professor professor = professorService.getProfessor(user);
+		model.addAttribute("profile", professor);
 		return "professor/profile";
 	}
 	
 	@PostMapping("/professor/save_profile")
-	public String saveProfile(@ModelAttribute("profile") ProfessorDto professorDto) {
-		Professor professor = professorService.getOrCreateProfessor(professorDto);
+	public String saveProfile(@ModelAttribute("profile") Professor professor) {
 		professorService.saveProfessor(professor);
 		return "redirect:/professor/dashboard";
 	}

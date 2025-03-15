@@ -10,7 +10,7 @@
     <div class="container">
         <p class="h4 mb-4">Student Profile</p>
         <form action="#" th:action="@{/student/save_profile}" th:object="${profile}" method="POST">
-            <input type="hidden" th:field="*{userId}" />
+			<input type="hidden" th:field="*{username}" />
 
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" th:field="*{fullname}" class="form-control mb-4 col-4" required/> 

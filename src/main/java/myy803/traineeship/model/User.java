@@ -15,11 +15,7 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="user_id", unique=true)
-	private int userID;
-	
-	@Column(name="username")
+	@Column(name="username", unique=true)
 	private String username;
 	
 	@Column(name="password")
@@ -29,6 +25,10 @@ public class User implements UserDetails {
 	@Column(name="role")
 	private Role role;
 
+	public User() {
+		super();
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
@@ -45,16 +45,8 @@ public class User implements UserDetails {
 		return this.username;
 	}
 	
-	public int getUserID() {
-		return this.userID;
-	}
-	
 	public Role getRole() {
 		return this.role;
-	}
-	
-	public void setUserID(int userID) {
-		this.userID = userID;
 	}
 	
 	public void setUsername(String username) {
