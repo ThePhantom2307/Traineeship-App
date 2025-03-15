@@ -13,12 +13,12 @@ import myy803.traineeship.model.User;
 public class StudentService implements IntStudentService {	
 	@Autowired
 	private StudentDAO studentDAO;
-	
+
 	@Override
 	public void saveStudent(Student student) {
 		studentDAO.save(student);
 	}
-	
+
 	@Override
 	public Boolean isStudentExists(String username) {
 		Optional<Student> student = studentDAO.findByUsername(username);
@@ -44,6 +44,8 @@ public class StudentService implements IntStudentService {
 	        student.setInterests("");
 	        student.setSkills("");
 	        student.setPreferredLocation("");
+	        student.setLookingForTraineeship(false);
+	        student.setAverageGrade(0.0);
 	    }
 	    
 		return student;

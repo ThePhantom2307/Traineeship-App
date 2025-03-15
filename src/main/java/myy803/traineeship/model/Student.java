@@ -28,16 +28,20 @@ public class Student {
     @Column(name="looking_for_traineeship")
     private Boolean lookingForTraineeship;
     
+    @Column(name="average_grade")
+    private Double averageGrade;
+    
     public Student() {}
 
-    public Student(String username, String fullname, String universityId, String interests, String skills, String preferredLocation, Boolean lookingForTraineeship) {
-        this.fullname = fullname;
+    public Student(String username, String fullname, String universityId, String interests, String skills, String preferredLocation, Boolean lookingForTraineeship, Double averageGrade) {
+    	this.username = username;
+    	this.fullname = fullname;
         this.universityId = universityId;
         this.interests = interests;
         this.skills = skills;
         this.preferredLocation = preferredLocation;
         this.lookingForTraineeship = lookingForTraineeship;
-        this.username = username;
+        this.averageGrade = averageGrade;
     }
     
     public String getUsername() {
@@ -86,5 +90,21 @@ public class Student {
     
     public void setPreferredLocation(String preferredLocation) {
         this.preferredLocation = preferredLocation;
+    }
+    
+    public Boolean getLookingForTraineeship() {
+    	return this.lookingForTraineeship;
+    }
+    
+    public void setLookingForTraineeship(Boolean lookingForTraineeship) {
+    	this.lookingForTraineeship = lookingForTraineeship;
+    }
+    
+    public Double getAverageGrade() {
+    	return this.averageGrade;
+    }
+    
+    public void setAverageGrade(Double averageGrade) {
+    	this.averageGrade = averageGrade;
     }
 }

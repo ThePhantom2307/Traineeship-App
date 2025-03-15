@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import myy803.traineeship.services.UserService;
+import myy803.traineeship.services.CompanyService;
 import myy803.traineeship.services.ProfessorService;
 import myy803.traineeship.services.StudentService;
 
@@ -37,6 +38,11 @@ public class WebSecurityConfig {
 	@Bean
 	public ProfessorService ProfessorDetailsService() {
 		return new ProfessorService();
+	}
+	
+	@Bean
+	public CompanyService CompanyDetailsService() {
+		return new CompanyService();
 	}
 
     @Bean
