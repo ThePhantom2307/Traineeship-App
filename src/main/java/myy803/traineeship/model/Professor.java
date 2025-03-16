@@ -1,5 +1,7 @@
 package myy803.traineeship.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class Professor {
 
     @Column(name="interests")
     private String interests;
+    
+    @OneToMany(mappedBy="supervisor", cascade=CascadeType.ALL)
+    private List<TraineeshipPosition> traineeshipPositions;
 
     public Professor() {}
 
@@ -46,5 +51,13 @@ public class Professor {
 
     public void setInterests(String interests) {
         this.interests = interests;
+    }
+    
+    public List<TraineeshipPosition> getTraineeshipPosition() {
+    	return this.traineeshipPositions;
+    }
+    
+    public void setAverageGrade(List<TraineeshipPosition> traineeshipPositions) {
+    	this.traineeshipPositions = traineeshipPositions;
     }
 }

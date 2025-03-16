@@ -31,9 +31,14 @@ public class Student {
     @Column(name="average_grade")
     private Double averageGrade;
     
+    @OneToOne(mappedBy="student")
+    private TraineeshipPosition traineeshipPosition;
+    
     public Student() {}
 
-    public Student(String username, String fullname, String universityId, String interests, String skills, String preferredLocation, Boolean lookingForTraineeship, Double averageGrade) {
+    public Student(String username, String fullname, String universityId, String interests,
+    		String skills, String preferredLocation, Boolean lookingForTraineeship,
+    		Double averageGrade) {
     	this.username = username;
     	this.fullname = fullname;
         this.universityId = universityId;
@@ -42,6 +47,7 @@ public class Student {
         this.preferredLocation = preferredLocation;
         this.lookingForTraineeship = lookingForTraineeship;
         this.averageGrade = averageGrade;
+        this.traineeshipPosition = null;
     }
     
     public String getUsername() {
@@ -106,5 +112,13 @@ public class Student {
     
     public void setAverageGrade(Double averageGrade) {
     	this.averageGrade = averageGrade;
+    }
+    
+    public TraineeshipPosition getTraineeshipPosition() {
+    	return this.traineeshipPosition;
+    }
+    
+    public void setAverageGrade(TraineeshipPosition traineeshipPosition) {
+    	this.traineeshipPosition = traineeshipPosition;
     }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Traineeship Application</title>
+</head>
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Traineeship Application</p>
+        <form action="#" th:action="@{/student/apply_for_traineeship}" th:object="${application}" method="POST">
+			<p th:if="${param.error}" style="color: red" class="errorMessage">You must create a profile to apply for traineeship!</p>
+			<p th:if="${param.success}" style="color: green" class="errorMessage">Applied successfully!</p>
+			<p th:if="${param.note}" style="color: #dba100" class="errorMessage">You already have applied!</p>
+			
+			<input type="hidden" th:field="*{username}" />
+			<input type="hidden" th:field="*{fullname}" />
+			<input type="hidden" th:field="*{universityId}" />
+			<input type="hidden" th:field="*{interests}" />
+			<input type="hidden" th:field="*{skills}" />
+			<input type="hidden" th:field="*{preferredLocation}" />
+			<input type="hidden" th:field="*{lookingForTraineeship}" />
+			<input type="hidden" th:field="*{averageGrade}" />
+			<input type="hidden" th:field="*{traineeshipPosition}" />
+			
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <a th:href="@{/student/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package myy803.traineeship.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,16 @@ public class StudentService implements IntStudentService {
 
 	@Override
 	public Boolean isStudentExists(String username) {
-		Optional<Student> student = studentDAO.findByUsername(username);
-		if (student.isPresent()) {
+		Optional<Student> optStudent = studentDAO.findByUsername(username);
+		if (optStudent.isPresent()) {
 			return true;
 		}
 		return false;
 	}
 	
 	@Override
-	public Student getStudent(User user) {
-		String username = user.getUsername();
-		Optional<Student> optStudent = studentDAO.findByUsername(username);
+	public Student getStudent(String username) {
+		Optional<Student> optStudent =  studentDAO.findByUsername(username);
 	    Student student;
 	    
 	    if (optStudent.isPresent()) {
@@ -49,5 +49,33 @@ public class StudentService implements IntStudentService {
 	    }
 	    
 		return student;
+	}
+	
+	@Override
+	public String applyForTraineeship(Student student) {
+		
+		if (!this.isStudentExists(student.getUsername())) {
+			return "redirect:/student/traineeship_application?error=true";
+		} else {
+			if (student.getLookingForTraineeship()) {
+				return "redirect:/student/traineeship_application?note=true";
+			} else {
+				student.setLookingForTraineeship(true);
+				this.saveStudent(student);
+				return "redirect:/student/traineeship_application?success=true";
+			}
+		} 
+	}
+
+	@Override
+	public List<Student> getAllPendingStudents() {
+		List<Student> pendingStudents = studentDAO.findByLookingForTraineeship(true);
+		return pendingStudents;
+	}
+	
+	@Override
+	public void rejectStudent(Student student) {
+		student.setLookingForTraineeship(false);
+		this.saveStudent(student);
 	}
 }
