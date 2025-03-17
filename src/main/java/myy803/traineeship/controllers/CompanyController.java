@@ -72,9 +72,18 @@ public class CompanyController {
 		return "redirect:/company/available_positions";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/company/delete")
 	public String removePosition(@RequestParam("id") Integer positionId) {
 		traineeshipPositionService.removePosition(positionId);
-		return "redirect:company/available_positions";
+		return "redirect:/company/available_positions";
+	}
+	
+	@RequestMapping("/company/positions_in_progress")
+	public String traineeshipPositionsInProgres(Model model) {
+		User user = userService.authenticateAndGetUser();
+		Company company = companyService.getCompany(user.getUsername());
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositions(company);
+		model.addAttribute("positionsInProgress", positionsInProgress);
+		return "company/positions_in_progress";
 	}
 }

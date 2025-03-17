@@ -33,7 +33,7 @@
 						<td th:utext="${#strings.replace(position.topics, ', ', '<br>')}"></td>
 				        <td th:utext="${#strings.replace(position.skills, ', ', '<br>')}"></td>
 				        <td>
-				            <a th:href="@{/delete(id=${position.positionId})}" class="btn btn-danger">delete</a>
+				            <a th:href="@{/company/delete(id=${position.positionId})}" class="btn btn-danger">delete</a>
 				        </td>
 				    </tr>
 				</tbody>

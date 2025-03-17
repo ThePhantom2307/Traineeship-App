@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Available Positions</title>
+    <title>Positions In Progress</title>
 </head>
 <body>
     <div class="container">
-        <h2>Available Positions</h2>
+        <h2>Positions In Progress</h2>
 		<br>
 		<a th:href="@{/company/create_new_position}" class="btn btn-primary btn-sm mb-3">Create New Position</a>
 		<a th:href="@{/company/dashboard}" class="btn btn-secondary btn-sm mb-3">Back to Dashboard</a>
@@ -17,25 +17,23 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
+						<th>Student Name</th>
                         <th>Title</th>
 						<th>Description</th>
 						<th>Duration</th>
                         <th>Topics</th>
 						<th>skills</th>
-						<th>Actions</th>
                     </tr>
                 </thead>
 				<tbody>
-				    <tr th:each="position : ${advertisedPositions}">
+				    <tr th:each="position : ${positionsInProgress}">						
+				        <td th:text="${position.student.fullname}"></td>
 				        <td th:text="${position.title}"></td>
 				        <td th:text="${position.description}"></td>
 						<td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
 						<td th:utext="${#strings.replace(position.topics, ', ', '<br>')}"></td>
 				        <td th:utext="${#strings.replace(position.skills, ', ', '<br>')}"></td>
-				        <td>
-				            <a th:href="@{/company/delete(id=${position.positionId})}" class="btn btn-danger">delete</a>
-				        </td>
-				    </tr>
+					</tr>
 				</tbody>
             </table>
         </div>

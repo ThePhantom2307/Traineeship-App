@@ -76,4 +76,16 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		student.setLookingForTraineeship(false);
 		this.savePosition(position);
 	}
+
+	@Override
+	public List<TraineeshipPosition> getAllInProgressPositions(Company company) {
+		List<TraineeshipPosition> traineeshipPositions = traineeshipPositionDAO.findByCompany(company);
+		List<TraineeshipPosition> traineeshipPositionsInProgress = new ArrayList<TraineeshipPosition>();
+		for (TraineeshipPosition position: traineeshipPositions) {
+			if (position.getIsAssigned()) {
+				traineeshipPositionsInProgress.add(position);
+			}
+		}
+		return traineeshipPositionsInProgress;
+	}
 }
