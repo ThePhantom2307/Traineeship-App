@@ -12,4 +12,5 @@ import myy803.traineeship.model.TraineeshipPosition;
 public interface TraineeshipPositionDAO extends JpaRepository<TraineeshipPosition, Integer>{
 	Optional<TraineeshipPosition> findById(Integer id);
 	List<TraineeshipPosition> findByCompany(Company company);
+	List<TraineeshipPosition> findByIsAssigned(Boolean isAssigned);
 }

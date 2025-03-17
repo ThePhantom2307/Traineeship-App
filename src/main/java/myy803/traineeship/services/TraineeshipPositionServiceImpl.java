@@ -53,7 +53,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		System.out.println("Deleting position with id: " + positionId);
 		traineeshipPositionDAO.deleteById(positionId);
 	}
-	
+
 	@Override
 	public List<TraineeshipPosition> getAllAdvertisedPositions(Company company) {
 		List<TraineeshipPosition> traineeshipPositions = traineeshipPositionDAO.findByCompany(company);
@@ -65,4 +65,6 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		}
 		return advertisedTraineeshipPositions;
 	}
+
+
 }

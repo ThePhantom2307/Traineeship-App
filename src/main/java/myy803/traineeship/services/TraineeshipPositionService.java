@@ -11,4 +11,5 @@ public interface TraineeshipPositionService {
 	void removePosition(Integer positionId);
 	TraineeshipPosition getTraineeshipPosition(Integer positionId);
 	List<TraineeshipPosition> getAllAdvertisedPositions(Company company);
+
 }
