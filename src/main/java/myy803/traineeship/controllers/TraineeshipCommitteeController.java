@@ -40,7 +40,7 @@ public class TraineeshipCommitteeController {
 		return "trainee_committee/students_applications";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/reject")
 	public String rejectStudent(@RequestParam("username") String username) {
 		Student student = studentService.getStudent(username);
 		traineeCommitteeService.rejectStudent(student);

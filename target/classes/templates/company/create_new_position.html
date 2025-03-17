@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <p class="h4 mb-4">Create Position</p>
-        <form action="#" th:action="@{/company/create_new_position}" th:object="${position}" method="POST">
+        <form action="#" th:action="@{/company/save_position}" th:object="${position}" method="POST">
             <input type="hidden" th:field="*{positionId}" />
 			<input type="hidden" th:field="*{isAssigned}" />
 			<input type="hidden" th:field="*{company}" />

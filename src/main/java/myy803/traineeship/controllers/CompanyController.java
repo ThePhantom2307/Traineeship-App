@@ -26,6 +26,9 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
+	@Autowired
+	TraineeshipPositionService traineeshipPositionService;
+	
 	@RequestMapping("/company/dashboard")
 	public String getStudentMainMenu(){
     	return "company/dashboard";
@@ -47,32 +50,31 @@ public class CompanyController {
 	
 	@RequestMapping("/company/available_positions")
 	public String availableTraineeshipPositions(Model model) {
-		/*User user = userService.authenticateAndGetUser();
+		User user = userService.authenticateAndGetUser();
 		Company company = companyService.getCompany(user);
 		List<TraineeshipPosition> advertisedPositions = traineeshipPositionService.getAllAdvertisedPositions(company);
-		model.addAttribute("advertisedPositions", advertisedPositions);*/
+		model.addAttribute("advertisedPositions", advertisedPositions);
 		return "company/available_positions";
 	}
 	
-	@RequestMapping("/company/create_position")
+	@RequestMapping("/company/create_new_position")
 	public String createNewPosition(Model model) {
-		/*User user = userService.authenticateAndGetUser();
+		User user = userService.authenticateAndGetUser();
 		Company company = companyService.getCompany(user);
 		TraineeshipPosition newTraineeshipPosition = traineeshipPositionService.createNewTraineeshipPosition(company);
-		model.addAttribute("position", newTraineeshipPosition);*/
-		return "company/create_position";
+		model.addAttribute("position", newTraineeshipPosition);
+		return "company/create_new_position";
 	}
 	
-	@PostMapping("/company/create_new_position")
+	@PostMapping("/company/save_position")
 	public String saveNewPosition(@ModelAttribute("position") TraineeshipPosition traineeshipPosition) {
-		//traineeshipPositionService.savePosition(traineeshipPosition);
-		return "company/available_positions";
+		traineeshipPositionService.savePosition(traineeshipPosition);
+		return "redirect:/company/available_positions";
 	}
 	
-	@GetMapping("/reject")
-	public String removePosition(@RequestParam("positionId") Integer positionId) {
-		/*TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
-		traineeshipPositionService.removePosition(position);*/
-	    return "redirect:/company/available_positions";
+	@GetMapping("/delete")
+	public String removePosition(@RequestParam("id") Integer positionId) {
+		traineeshipPositionService.removePosition(positionId);
+		return "redirect:company/available_positions";
 	}
 }

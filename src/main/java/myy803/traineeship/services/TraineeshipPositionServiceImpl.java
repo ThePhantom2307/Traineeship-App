@@ -49,8 +49,9 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 
 	@Override
-	public void removePosition(TraineeshipPosition traineeshipPosition) {
-		traineeshipPositionDAO.delete(traineeshipPosition);		
+	public void removePosition(Integer positionId) {
+		System.out.println("Deleting position with id: " + positionId);
+		traineeshipPositionDAO.deleteById(positionId);
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ import myy803.traineeship.model.TraineeshipPosition;
 public interface TraineeshipPositionService {
 	TraineeshipPosition createNewTraineeshipPosition(Company company);
 	void savePosition(TraineeshipPosition traineeshipPosition);
-	void removePosition(TraineeshipPosition traineeshipPosition);
+	void removePosition(Integer positionId);
 	TraineeshipPosition getTraineeshipPosition(Integer positionId);
 	List<TraineeshipPosition> getAllAdvertisedPositions(Company company);
 }
