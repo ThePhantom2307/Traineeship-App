@@ -73,6 +73,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		position.setStudent(student);
 		position.setSupervisor(supervisor);
 		position.setIsAssigned(true);
+		student.setLookingForTraineeship(false);
 		this.savePosition(position);
 	}
 }
