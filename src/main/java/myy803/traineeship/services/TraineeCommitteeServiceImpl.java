@@ -31,13 +31,9 @@ public class TraineeCommitteeServiceImpl implements TraineeCommitteeService {
 		return pendingStudents;
 	}
 
-
 	@Override
 	public List<TraineeshipPosition> getAvailablePositions() {
 		List<TraineeshipPosition> availablePositions = traineeshipPositionDAO.findByIsAssigned(false);
-		for (TraineeshipPosition position : availablePositions) {
-			System.err.println(position);
-		}
 		return availablePositions;
 	}
 

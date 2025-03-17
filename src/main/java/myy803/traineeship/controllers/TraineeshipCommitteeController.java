@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import myy803.traineeship.model.Student;
 import myy803.traineeship.services.StudentService;
@@ -41,18 +42,18 @@ public class TraineeshipCommitteeController {
 		return "trainee_committee/students_applications";
 	}
 	
-	@GetMapping("/reject")
+	@GetMapping("/trainee_committee/reject")
 	public String rejectStudent(@RequestParam("username") String username) {
 		Student student = studentService.getStudent(username);
 		traineeCommitteeService.rejectStudent(student);
 	    return "redirect:/trainee_committee/students_applications";
 	}
 	
-	@GetMapping("/accept")
-	public String acceptStudent(@RequestParam("username") String username, Model model) {
+	@GetMapping("/trainee_committee/accept")
+	public String acceptStudent(@RequestParam("username") String username, RedirectAttributes redirectAttributes) {
 		Student student = studentService.getStudent(username);
-		model.addAttribute("student", student);
-		return "trainee_committee/assign_position";
+		redirectAttributes.addFlashAttribute("student", student);
+		return "redirect:/trainee_committee/assign_position";
 	}
 
 	@RequestMapping("/trainee_committee/assign_position")
@@ -60,6 +61,6 @@ public class TraineeshipCommitteeController {
 		userService.authenticateAndGetUser();
 		List<TraineeshipPosition> availablePositions = traineeCommitteeService.getAvailablePositions();
 		model.addAttribute("availablePositions", availablePositions);
-		return "trainee_committee/students_applications";
+		return "trainee_committee/assign_position";
 	}
 }

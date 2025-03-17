@@ -20,7 +20,7 @@
 						<th>University ID</th>
 						<th>Skills</th>
                         <th>Interests</th>
-						<th>PreferredLocation</th>
+						<th>Preferred Location</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
@@ -32,8 +32,8 @@
 				        <td th:utext="${#strings.replace(student.interests, ', ', '<br>')}"></td>
 				        <td th:text="${student.preferredLocation}"></td>
 				        <td>
-				            <a th:href="@{/accept(username=${student.username})}" class="btn btn-success">Accept</a>
-							<a th:href="@{/reject(username=${student.username})}" class="btn btn-danger">Reject</a>
+				            <a th:href="@{/trainee_committee/accept(username=${student.username})}" class="btn btn-success">Accept</a>
+							<a th:href="@{/trainee_committee/reject(username=${student.username})}" class="btn btn-danger">Reject</a>
 				        </td>
 				    </tr>
 				</tbody>
