@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Find Supervisor</title>
+</head>
+<body>
+<div class="container">
+    <h2>Find Supervisor</h2>
+    <br>
+    <a th:href="@{/trainee_committee/students_applications}" class="btn btn-danger">Cancel Assignment</a>
+    <br><br>
+	
+	<div class="container">
+		<div class="card mb-3" th:if="${student != null}">
+		    <div class="card-header">
+		      	Selected Student Details
+		    </div>
+		    <div class="card-body">
+		      	<p class="card-text">
+		       		<strong>Fullname:</strong> <span th:text="${student.fullname}"></span>
+		      	</p>
+		      	<p class="card-text">
+		       		<strong>University ID:</strong> <span th:text="${student.universityId}"></span>
+		      	</p>
+		      	<p class="card-text">
+		        	<strong>Interests:</strong> <span th:text="${student.interests}"></span>
+		      	</p>
+		      	<p class="card-text">
+		        	<strong>Skills:</strong> <span th:text="${student.skills}"></span>
+		      	</p>
+		      	<p class="card-text">
+		        	<strong>Preferred Location:</strong> <span th:text="${student.preferredLocation}"></span>
+		      	</p>
+			</div>
+		</div>
+	</div>
+
+    <div class="table">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Fullname</th>
+                <th>Intrests</th>
+				<th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="professor : ${professors}">
+                <td th:text="${professor.fullname}"></td>
+                <td th:text="${professor.interests}"></td>
+                <td>
+					<a th:href="@{/trainee_committee/select_supervisor(position=${positionId}, student_username=${student.username}, professor_username=${professor.username})}" 
+					   class="btn btn-success">Select</a>
+				</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+

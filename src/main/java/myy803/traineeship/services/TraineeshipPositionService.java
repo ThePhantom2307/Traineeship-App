@@ -3,6 +3,8 @@ package myy803.traineeship.services;
 import java.util.List;
 
 import myy803.traineeship.model.Company;
+import myy803.traineeship.model.Professor;
+import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
 
 public interface TraineeshipPositionService {
@@ -11,5 +13,5 @@ public interface TraineeshipPositionService {
 	void removePosition(Integer positionId);
 	TraineeshipPosition getTraineeshipPosition(Integer positionId);
 	List<TraineeshipPosition> getAllAdvertisedPositions(Company company);
-
+	void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position);
 }

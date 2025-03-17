@@ -1,10 +1,12 @@
 package myy803.traineeship.services;
 
+import java.util.List;
+
 import myy803.traineeship.model.Professor;
-import myy803.traineeship.model.User;
 
 public interface ProfessorService {
 	void saveProfessor(Professor professor);
 	Boolean isProfessorExists(String username);
-	Professor getProfessor(User user);
+	Professor getProfessor(String username);
+	List<Professor> getAllProfessors();
 }

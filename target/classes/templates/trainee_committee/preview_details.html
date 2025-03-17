@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+    <title>Assign Student</title>
+</head>
+<body>
+<div class="container">
+    <h2>Assign Student</h2>
+    <br>
+	<a th:href="@{/trainee_committee/assign_student(position=${position.positionId}, student_username=${student.username}, professor_username=${professor.username})}" class="btn btn-primary">Assign Student</a>
+    <a th:href="@{/trainee_committee/students_applications}" class="btn btn-danger">Cancel Assignment</a>
+    <br><br>
+    
+    <div class="container">
+        <div class="card mb-3" th:if="${student != null}">
+            <div class="card-header">
+                Selected Student Details
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Fullname:</strong> <span th:text="${student.fullname}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>University ID:</strong> <span th:text="${student.universityId}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Interests:</strong> <span th:text="${student.interests}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Skills:</strong> <span th:text="${student.skills}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Preferred Location:</strong> <span th:text="${student.preferredLocation}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card mb-3" th:if="${professor != null}">
+            <div class="card-header">
+                Selected Supervisor Details
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Fullname:</strong> <span th:text="${professor.fullname}"></span>
+                </p>
+                <p class="card-text">
+                    <strong>Interests:</strong> <span th:text="${professor.interests}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+	
+	<div class="container">
+		<div class="card mb-3" th:if="${student != null}">
+			<div class="card-header">
+				Selected Position Details
+			</div>
+			<div class="card-body">
+				<p class="card-text">
+					<strong>Company Name:</strong> <span th:text="${position.company.companyName}"></span>
+				</p>
+				<p class="card-text">
+					<strong>Position Title:</strong> <span th:text="${position.title}"></span>
+				</p>
+				<p class="card-text">
+					<strong>Position Description:</strong> <span th:text="${position.description}"></span>
+				</p>
+				<p class="card-text">
+					<strong>Position Duration:</strong> <span th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></span>
+				</p>
+				<p class="card-text">
+					<strong>Topics:</strong> <span th:text="${position.topics}"></span>
+				</p>
+				<p class="card-text">
+					<strong>Required Skills:</strong> <span th:text="${position.skills}"></span>
+				</p>
+				<p class="card-text">
+					<strong>Company Location:</strong> <span th:text="${position.company.location}"></span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

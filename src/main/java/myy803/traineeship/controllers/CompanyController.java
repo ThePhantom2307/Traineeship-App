@@ -37,7 +37,7 @@ public class CompanyController {
 	@RequestMapping("/company/profile")
 	public String getOrCreateProfile(Model model) {
 	    User user = userService.authenticateAndGetUser();
-	    Company company = companyService.getCompany(user);
+	    Company company = companyService.getCompany(user.getUsername());
 	    model.addAttribute("profile", company);
 	    return "company/profile";
 	}
@@ -51,7 +51,7 @@ public class CompanyController {
 	@RequestMapping("/company/available_positions")
 	public String availableTraineeshipPositions(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Company company = companyService.getCompany(user);
+		Company company = companyService.getCompany(user.getUsername());
 		List<TraineeshipPosition> advertisedPositions = traineeshipPositionService.getAllAdvertisedPositions(company);
 		model.addAttribute("advertisedPositions", advertisedPositions);
 		return "company/available_positions";
@@ -60,7 +60,7 @@ public class CompanyController {
 	@RequestMapping("/company/create_new_position")
 	public String createNewPosition(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Company company = companyService.getCompany(user);
+		Company company = companyService.getCompany(user.getUsername());
 		TraineeshipPosition newTraineeshipPosition = traineeshipPositionService.createNewTraineeshipPosition(company);
 		model.addAttribute("position", newTraineeshipPosition);
 		return "company/create_new_position";

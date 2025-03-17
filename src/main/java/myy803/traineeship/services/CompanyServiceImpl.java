@@ -6,17 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.CompanyDAO;
-import myy803.traineeship.dao.TraineeshipPositionDAO;
 import myy803.traineeship.model.Company;
-import myy803.traineeship.model.User;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	private CompanyDAO companyDAO;
-	
-	@Autowired
-	private TraineeshipPositionDAO traineeshipPositionDAO;
 
 	@Override
 	public void saveCompany(Company company) {
@@ -33,8 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	
 	@Override
-	public Company getCompany(User user) {
-		String username = user.getUsername();
+	public Company getCompany(String username) {
 		Optional<Company> optCompany = companyDAO.findByUsername(username);
 	    Company company;
 	    

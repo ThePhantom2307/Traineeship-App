@@ -36,5 +36,4 @@ public class TraineeCommitteeServiceImpl implements TraineeCommitteeService {
 		List<TraineeshipPosition> availablePositions = traineeshipPositionDAO.findByIsAssigned(false);
 		return availablePositions;
 	}
-
 }

@@ -28,7 +28,7 @@ public class ProfessorController {
 	@RequestMapping("/professor/profile")
 	public String getProfile(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Professor professor = professorService.getProfessor(user);
+		Professor professor = professorService.getProfessor(user.getUsername());
 		model.addAttribute("profile", professor);
 		return "professor/profile";
 	}

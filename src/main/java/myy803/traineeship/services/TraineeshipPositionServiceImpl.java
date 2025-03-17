@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.TraineeshipPositionDAO;
 import myy803.traineeship.model.Company;
+import myy803.traineeship.model.Professor;
+import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
 
 @Service
@@ -66,5 +68,11 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		return advertisedTraineeshipPositions;
 	}
 
-
+	@Override
+	public void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position) {
+		position.setStudent(student);
+		position.setSupervisor(supervisor);
+		position.setIsAssigned(true);
+		this.savePosition(position);
+	}
 }

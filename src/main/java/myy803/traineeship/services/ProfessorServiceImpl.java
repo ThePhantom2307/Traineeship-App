@@ -1,5 +1,6 @@
 package myy803.traineeship.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.ProfessorDAO;
 import myy803.traineeship.model.Professor;
-import myy803.traineeship.model.User;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService{
@@ -30,8 +30,7 @@ public class ProfessorServiceImpl implements ProfessorService{
 	}
 	
 	@Override
-	public Professor getProfessor(User user) {
-		String username = user.getUsername();
+	public Professor getProfessor(String username) {
 		Optional<Professor> optProfessor = professorDAO.findByUsername(username);
 	    Professor professor;
 	    
@@ -45,5 +44,13 @@ public class ProfessorServiceImpl implements ProfessorService{
 	    }
 	    
 		return professor;
+	}
+
+	// IMPORTANT: this method is used to display professors in process of assign a supervisor, when search strategy
+	// 			  will be created this method will never be used
+	@Override
+	public List<Professor> getAllProfessors() {
+		List<Professor> professors = professorDAO.findAll();
+		return professors;
 	}
 }
