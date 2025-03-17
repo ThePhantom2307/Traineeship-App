@@ -46,4 +46,11 @@ public class TraineeshipCommitteeController {
 		traineeCommitteeService.rejectStudent(student);
 	    return "redirect:/trainee_committee/students_applications";
 	}
+	
+	@GetMapping("/accept")
+	public String acceptStudent(@RequestParam("username") String username, Model model) {
+		Student student = studentService.getStudent(username);
+		model.addAttribute("student", student);
+		return "/trainee_committee/find_position";
+	}
 }
