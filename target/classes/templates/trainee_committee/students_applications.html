@@ -32,7 +32,7 @@
 				        <td th:utext="${#strings.replace(student.interests, ', ', '<br>')}"></td>
 				        <td th:text="${student.preferredLocation}"></td>
 				        <td>
-				            <a th:href="@{/approve(username=${student.username})}" class="btn btn-success">Approve</a>
+				            <a th:href="@{/accept(username=${student.username})}" class="btn btn-success">Approve</a>
 							<a th:href="@{/reject(username=${student.username})}" class="btn btn-danger">Reject</a>
 				        </td>
 				    </tr>

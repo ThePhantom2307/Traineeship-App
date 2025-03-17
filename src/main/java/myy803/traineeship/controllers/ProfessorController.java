@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.User;
-import myy803.traineeship.services.IntProfessorService;
-import myy803.traineeship.services.IntUserService;
+import myy803.traineeship.services.ProfessorService;
+import myy803.traineeship.services.UserService;
 
 @Controller
 public class ProfessorController {
 	@Autowired
-	IntUserService userService;
+	UserService userService;
 	
 	@Autowired
-	IntProfessorService professorService;
+	ProfessorService professorService;
 	
 	@RequestMapping("/professor/dashboard")
 	public String getProfessorMainMenu() {

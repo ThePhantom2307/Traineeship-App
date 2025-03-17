@@ -14,10 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import myy803.traineeship.services.UserService;
+import myy803.traineeship.services.UserServiceImpl;
 import myy803.traineeship.services.CompanyService;
-import myy803.traineeship.services.ProfessorService;
+import myy803.traineeship.services.CompanyServiceImpl;
+import myy803.traineeship.services.ProfessorServiceImpl;
 import myy803.traineeship.services.StudentService;
+import myy803.traineeship.services.StudentServiceImpl;
+import myy803.traineeship.services.TraineeCommitteeServiceImpl;
+import myy803.traineeship.services.TraineeshipPositionServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -27,24 +31,9 @@ public class WebSecurityConfig {
 	
 	@Bean
     public UserDetailsService userDetailsService() {
-        return new UserService();
+        return new UserServiceImpl();
     }
 	
-	@Bean
-	public StudentService studentDetailsService() {
-		return new StudentService();
-	}
-	
-	@Bean
-	public ProfessorService ProfessorDetailsService() {
-		return new ProfessorService();
-	}
-	
-	@Bean
-	public CompanyService CompanyDetailsService() {
-		return new CompanyService();
-	}
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
     	return new BCryptPasswordEncoder();

@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 import myy803.traineeship.model.Student;
 import myy803.traineeship.model.User;
-import myy803.traineeship.services.IntStudentService;
-import myy803.traineeship.services.IntUserService;
+import myy803.traineeship.services.StudentService;
+import myy803.traineeship.services.UserService;
 
 @Controller
 public class StudentController {
 	@Autowired
-	IntUserService userService;
+	UserService userService;
 	
 	@Autowired
-	private IntStudentService studentService;
+	StudentService studentService;
 	
 	@RequestMapping("/student/dashboard")
 	public String getStudentMainMenu(){

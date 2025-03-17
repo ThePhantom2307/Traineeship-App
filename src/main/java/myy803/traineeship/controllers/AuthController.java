@@ -7,12 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import myy803.traineeship.model.User;
-import myy803.traineeship.services.IntUserService;
+import myy803.traineeship.services.UserService;
 
 @Controller
 public class AuthController {
 	@Autowired
-	IntUserService userService;
+	UserService userService;
 	
 	@RequestMapping("/login")
 	public String login() {
