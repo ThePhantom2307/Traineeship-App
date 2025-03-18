@@ -22,6 +22,7 @@
 						<th>Duration</th>
                         <th>Topics</th>
 						<th>skills</th>
+						<th>Actions</th>
                     </tr>
                 </thead>
 				<tbody>
@@ -32,6 +33,9 @@
 						<td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
 						<td th:utext="${#strings.replace(position.topics, ', ', '<br>')}"></td>
 				        <td th:utext="${#strings.replace(position.skills, ', ', '<br>')}"></td>
+						<td>
+							<a th:href="@{/company/evaluate_student(username=${position.student.username})}" class="btn btn-success">Evaluate Student</a>
+						</td>
 					</tr>
 				</tbody>
             </table>
