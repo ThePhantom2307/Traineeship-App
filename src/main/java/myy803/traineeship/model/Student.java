@@ -118,7 +118,7 @@ public class Student {
     	return this.traineeshipPosition;
     }
     
-    public void setAverageGrade(TraineeshipPosition traineeshipPosition) {
+    public void setTraineeshipPosition(TraineeshipPosition traineeshipPosition) {
     	this.traineeshipPosition = traineeshipPosition;
     }
 }

@@ -10,6 +10,8 @@
     <div class="container">
         <h2>Available Positions</h2>
 		<br>
+		<p th:if="${param.error_company_profile}" style="color: red" class="errorMessage">You must create a profile to create a position!</p>
+		<br>
 		<a th:href="@{/company/create_new_position}" class="btn btn-primary btn-sm mb-3">Create New Position</a>
 		<a th:href="@{/company/dashboard}" class="btn btn-secondary btn-sm mb-3">Back to Dashboard</a>
 		<br><br>
@@ -33,7 +35,7 @@
 						<td th:utext="${#strings.replace(position.topics, ', ', '<br>')}"></td>
 				        <td th:utext="${#strings.replace(position.skills, ', ', '<br>')}"></td>
 				        <td>
-				            <a th:href="@{/company/delete(id=${position.positionId})}" class="btn btn-danger">delete</a>
+				            <a th:href="@{/company/delete_position(id=${position.positionId})}" class="btn btn-danger">delete</a>
 				        </td>
 				    </tr>
 				</tbody>

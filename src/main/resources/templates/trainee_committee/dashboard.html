@@ -14,8 +14,7 @@
 		<h4>Logged as: <span sec:authentication="name"></span></h4>
 		<h4>Has role: <span sec:authentication="authorities"></span></h4>
 		<br><br><br><br>
-		
-		<a th:href="@{/trainee_committee/dashboard}" class="btn btn-primary btn-sm mb-3">Home</a>
+
 		<a th:href="@{/trainee_committee/students_applications}" class="btn btn-primary btn-sm mb-3">Students Applications</a>
 		<a th:href="@{/trainee_committee/traineeships_in_progress}" class="btn btn-primary btn-sm mb-3">Traineeships in Progress</a>
 		<a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.StudentDAO;
 import myy803.traineeship.model.Student;
+import myy803.traineeship.model.TraineeshipPosition;
 
 @Service
 public class StudentServiceImpl implements StudentService {	
@@ -51,18 +52,20 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public String applyForTraineeship(Student student) {
-		
-		if (!this.isStudentExists(student.getUsername())) {
+		TraineeshipPosition assignedPosition = student.getTraineeshipPosition();
+		String username = student.getUsername();
+		Boolean isStudentLookingForTraineeship = student.getLookingForTraineeship();
+		if (!this.isStudentExists(username)) {
 			return "redirect:/student/traineeship_application?error=true";
+		} else if (assignedPosition != null) {
+			return "redirect:/student/traineeship_application?already_assigned=true";
+		} else if (isStudentLookingForTraineeship) {
+			return "redirect:/student/traineeship_application?note=true";
 		} else {
-			if (student.getLookingForTraineeship()) {
-				return "redirect:/student/traineeship_application?note=true";
-			} else {
-				student.setLookingForTraineeship(true);
-				this.saveStudent(student);
-				return "redirect:/student/traineeship_application?success=true";
-			}
-		} 
+			student.setLookingForTraineeship(true);
+			this.saveStudent(student);
+			return "redirect:/student/traineeship_application?success=true";
+		}
 	}
 	
 	@Override

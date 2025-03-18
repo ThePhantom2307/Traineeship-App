@@ -36,14 +36,15 @@ public class CompanyController {
 	
 	@RequestMapping("/company/profile")
 	public String getOrCreateProfile(Model model) {
-	    User user = userService.authenticateAndGetUser();
-	    Company company = companyService.getCompany(user.getUsername());
+		User user = userService.authenticateAndGetUser();
+		String username = user.getUsername();
+		Company company = companyService.getCompanyByUsername(username);
 	    model.addAttribute("profile", company);
 	    return "company/profile";
 	}
 	
 	@PostMapping("/company/save_profile")
-	public String saveStudentProfile(@ModelAttribute("profile") Company company) {
+	public String saveCompanyProfile(@ModelAttribute("profile") Company company) {
 		companyService.saveCompany(company);
 	    return "redirect:/company/dashboard";
 	}
@@ -51,7 +52,8 @@ public class CompanyController {
 	@RequestMapping("/company/available_positions")
 	public String availableTraineeshipPositions(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Company company = companyService.getCompany(user.getUsername());
+		String username = user.getUsername();
+		Company company = companyService.getCompanyByUsername(username);
 		List<TraineeshipPosition> advertisedPositions = traineeshipPositionService.getAllAdvertisedPositions(company);
 		model.addAttribute("advertisedPositions", advertisedPositions);
 		return "company/available_positions";
@@ -60,10 +62,15 @@ public class CompanyController {
 	@RequestMapping("/company/create_new_position")
 	public String createNewPosition(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Company company = companyService.getCompany(user.getUsername());
-		TraineeshipPosition newTraineeshipPosition = traineeshipPositionService.createNewTraineeshipPosition(company);
-		model.addAttribute("position", newTraineeshipPosition);
-		return "company/create_new_position";
+		String username = user.getUsername();
+		if (companyService.isCompanyExists(username)) {
+			Company company = companyService.getCompanyByUsername(username);
+			TraineeshipPosition newTraineeshipPosition = traineeshipPositionService.createNewTraineeshipPosition(company);
+			model.addAttribute("position", newTraineeshipPosition);
+			return "company/create_new_position";
+		} else {
+			return "redirect:/company/available_positions?error_company_profile=true";
+		}
 	}
 	
 	@PostMapping("/company/save_position")
@@ -72,7 +79,7 @@ public class CompanyController {
 		return "redirect:/company/available_positions";
 	}
 	
-	@GetMapping("/company/delete")
+	@GetMapping("/company/delete_position")
 	public String removePosition(@RequestParam("id") Integer positionId) {
 		traineeshipPositionService.removePosition(positionId);
 		return "redirect:/company/available_positions";
@@ -81,7 +88,8 @@ public class CompanyController {
 	@RequestMapping("/company/positions_in_progress")
 	public String traineeshipPositionsInProgres(Model model) {
 		User user = userService.authenticateAndGetUser();
-		Company company = companyService.getCompany(user.getUsername());
+		String username = user.getUsername();
+		Company company = companyService.getCompanyByUsername(username);
 		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositions(company);
 		model.addAttribute("positionsInProgress", positionsInProgress);
 		return "company/positions_in_progress";

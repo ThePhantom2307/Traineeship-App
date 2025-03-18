@@ -13,6 +13,7 @@
 			<p th:if="${param.error}" style="color: red" class="errorMessage">You must create a profile to apply for traineeship!</p>
 			<p th:if="${param.success}" style="color: green" class="errorMessage">Applied successfully!</p>
 			<p th:if="${param.note}" style="color: #dba100" class="errorMessage">You already have applied!</p>
+			<p th:if="${param.already_assigned}" style="color: red" class="error_message">You already have been assigned to a position!</p>
 			
 			<input type="hidden" th:field="*{username}" />
 			<input type="hidden" th:field="*{fullname}" />

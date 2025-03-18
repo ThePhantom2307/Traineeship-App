@@ -53,11 +53,11 @@ public class Professor {
         this.interests = interests;
     }
     
-    public List<TraineeshipPosition> getTraineeshipPosition() {
-    	return this.traineeshipPositions;
+    public void addTraineeshipPosition(TraineeshipPosition traineeshipPosition) {
+    	this.traineeshipPositions.add(traineeshipPosition);
     }
     
-    public void setAverageGrade(List<TraineeshipPosition> traineeshipPositions) {
-    	this.traineeshipPositions = traineeshipPositions;
+    public List<TraineeshipPosition> getTraineeshipPosition() {
+    	return this.traineeshipPositions;
     }
 }

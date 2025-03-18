@@ -1,5 +1,6 @@
 package myy803.traineeship.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 	@Override
 	public List<Professor> getAllProfessors() {
 		List<Professor> professors = professorDAO.findAll();
-		return professors;
+		List<Professor> professorsWithProfile = new ArrayList<Professor>();
+		for (Professor professor: professors) {
+			professorsWithProfile.add(professor);
+		}
+		return professorsWithProfile;
 	}
 }
