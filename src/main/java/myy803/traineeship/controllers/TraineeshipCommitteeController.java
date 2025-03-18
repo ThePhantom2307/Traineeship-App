@@ -26,10 +26,10 @@ public class TraineeshipCommitteeController {
 	private UserService userService;
 	
 	@Autowired
-	private StudentService studentService;
+	private ProfessorService professorService;
 	
 	@Autowired
-	private ProfessorService professorService;
+	private StudentService studentService;
 	
 	@Autowired
 	private TraineeshipPositionService traineeshipPositionService;
