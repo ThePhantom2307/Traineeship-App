@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Evaluate Student</title>
+</head>
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Evaluate Student</p>
+		<form th:action="@{/company/submit_evaluation}" th:object="${evaluation}" method="POST">
+            <input type="hidden" th:field="*{evaluationType}" />
+			<input type="hidden" th:field="*{traineeshipPosition}" />
+			<input type="hidden" th:field="*{evaluationId}" />
+			
+            <div class="form-group">
+                <label>Motivation:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{motivation}" value="1" id="motivation1">
+                    <label class="form-check-label" for="motivation1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{motivation}" value="2" id="motivation2">
+                    <label class="form-check-label" for="motivation2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{motivation}" value="3" id="motivation3">
+                    <label class="form-check-label" for="motivation3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{motivation}" value="4" id="motivation4">
+                    <label class="form-check-label" for="motivation4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{motivation}" value="5" id="motivation5">
+                    <label class="form-check-label" for="motivation5">5</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Efficiency:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{efficiency}" value="1" id="efficiency1">
+                    <label class="form-check-label" for="efficiency1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{efficiency}" value="2" id="efficiency2">
+                    <label class="form-check-label" for="efficiency2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{efficiency}" value="3" id="efficiency3">
+                    <label class="form-check-label" for="efficiency3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{efficiency}" value="4" id="efficiency4">
+                    <label class="form-check-label" for="efficiency4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{efficiency}" value="5" id="efficiency5">
+                    <label class="form-check-label" for="efficiency5">5</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Effectiveness:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{effectiveness}" value="1" id="effectiveness1">
+                    <label class="form-check-label" for="effectiveness1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{effectiveness}" value="2" id="effectiveness2">
+                    <label class="form-check-label" for="effectiveness2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{effectiveness}" value="3" id="effectiveness3">
+                    <label class="form-check-label" for="effectiveness3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{effectiveness}" value="4" id="effectiveness4">
+                    <label class="form-check-label" for="effectiveness4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" th:field="*{effectiveness}" value="5" id="effectiveness5">
+                    <label class="form-check-label" for="effectiveness5">5</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit Evaluation</button>
+			<a th:href="@{/company/positions_in_progress}" class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

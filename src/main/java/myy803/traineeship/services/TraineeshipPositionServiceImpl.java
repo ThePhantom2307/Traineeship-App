@@ -1,6 +1,5 @@
 package myy803.traineeship.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.TraineeshipPositionDAO;
 import myy803.traineeship.model.Company;
+import myy803.traineeship.model.Evaluation;
 import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
@@ -57,7 +57,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 
 	@Override
 	public List<TraineeshipPosition> getAllAdvertisedPositions(Company company) {
-		List<TraineeshipPosition> advertisedTraineeshipPositions = traineeshipPositionDAO.findByCompanyAndIsAssigned(company,false);;
+		List<TraineeshipPosition> advertisedTraineeshipPositions = traineeshipPositionDAO.findByCompanyAndIsAssigned(company, false);
 		return advertisedTraineeshipPositions;
 	}
 	
@@ -79,14 +79,15 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 
 	@Override
-	public List<TraineeshipPosition> getAllInProgressPositions(Company company) {
-		List<TraineeshipPosition> traineeshipPositions = traineeshipPositionDAO.findByCompany(company);
-		List<TraineeshipPosition> traineeshipPositionsInProgress = new ArrayList<TraineeshipPosition>();
-		for (TraineeshipPosition position: traineeshipPositions) {
-			if (position.getIsAssigned()) {
-				traineeshipPositionsInProgress.add(position);
-			}
-		}
+	public List<TraineeshipPosition> getAllInProgressPositionsByCompany(Company company) {
+		List<TraineeshipPosition> traineeshipPositionsInProgress = traineeshipPositionDAO.findByCompanyAndIsAssigned(company, true);
 		return traineeshipPositionsInProgress;
+	}
+
+	@Override
+	public void evaluateStudent(Evaluation evaluation) {
+		TraineeshipPosition position = evaluation.getTraineeshipPosition();
+		position.addEvaluation(evaluation);
+		this.savePosition(position);
 	}
 }

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import myy803.traineeship.model.Company;
+import myy803.traineeship.model.Evaluation;
 import myy803.traineeship.model.TraineeshipPosition;
 import myy803.traineeship.model.User;
 import myy803.traineeship.services.CompanyService;
+import myy803.traineeship.services.EvaluationService;
 import myy803.traineeship.services.TraineeshipPositionService;
 import myy803.traineeship.services.UserService;
 
@@ -28,6 +30,9 @@ public class CompanyController {
 	
 	@Autowired
 	TraineeshipPositionService traineeshipPositionService;
+	
+	@Autowired
+	EvaluationService evaluationService;
 	
 	@RequestMapping("/company/dashboard")
 	public String getStudentMainMenu(){
@@ -90,8 +95,22 @@ public class CompanyController {
 		User user = userService.authenticateAndGetUser();
 		String username = user.getUsername();
 		Company company = companyService.getCompanyByUsername(username);
-		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositions(company);
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositionsByCompany(company);
 		model.addAttribute("positionsInProgress", positionsInProgress);
 		return "company/positions_in_progress";
+	}
+	
+	@GetMapping("/company/evaluate_student")
+	public String evaluateStudent(@RequestParam("position") Integer positionId, Model model) {
+	    TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
+	    Evaluation evaluation = evaluationService.getCompanyEvaluation(position);
+	    model.addAttribute("evaluation", evaluation);
+	    return "company/evaluate_student";
+	}
+	
+	@PostMapping("/company/submit_evaluation")
+	public String submitEvaluation(@ModelAttribute("evaluation") Evaluation evaluation) {
+	    traineeshipPositionService.evaluateStudent(evaluation);
+	    return "redirect:/company/positions_in_progress";
 	}
 }

@@ -1,7 +1,12 @@
 package myy803.traineeship.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name="traineeship_positions")
@@ -51,6 +56,10 @@ public class TraineeshipPosition {
 	@JoinColumn(name="company_username")
 	private Company company;
 	
+	@OneToMany(mappedBy = "traineeshipPosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Size(max=2)
+    private List<Evaluation> evaluations = new ArrayList<>();
+	
 	public TraineeshipPosition() {}
 
 	public TraineeshipPosition(Integer positionId, String title, String description, LocalDate fromDate,
@@ -70,8 +79,6 @@ public class TraineeshipPosition {
 		this.supervisor = supervisor;
 		this.company = company;
 	}
-
-	// Getters and Setters
 
 	public Integer getPositionId() {
 		return positionId;
@@ -176,4 +183,19 @@ public class TraineeshipPosition {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	
+	public List<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(List<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
+    
+    public void addEvaluation(Evaluation evaluation) {
+        if (this.evaluations.size() < 2) {
+        	evaluation.setTraineeshipPosition(this);
+            this.evaluations.add(evaluation);
+        }
+    }
 }

@@ -17,11 +17,8 @@
                 <thead class="thead-dark">
                     <tr>
 						<th>Student Name</th>
-                        <th>Title</th>
-						<th>Description</th>
+                        <th>Position Title</th>
 						<th>Duration</th>
-                        <th>Topics</th>
-						<th>skills</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
@@ -29,12 +26,9 @@
 				    <tr th:each="position : ${positionsInProgress}">						
 				        <td th:text="${position.student.fullname}"></td>
 				        <td th:text="${position.title}"></td>
-				        <td th:text="${position.description}"></td>
 						<td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
-						<td th:utext="${#strings.replace(position.topics, ', ', ',<br>')}"></td>
-				        <td th:utext="${#strings.replace(position.skills, ', ', ',<br>')}"></td>
 						<td>
-							<a th:href="@{/company/evaluate_student(username=${position.student.username})}" class="btn btn-success">Evaluate Student</a>
+							<a th:href="@{/company/evaluate_student(position=${position.positionId})}" class="btn btn-success">Evaluate Student</a>
 						</td>
 					</tr>
 				</tbody>
