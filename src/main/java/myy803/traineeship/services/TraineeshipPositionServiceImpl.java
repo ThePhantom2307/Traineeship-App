@@ -57,13 +57,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 
 	@Override
 	public List<TraineeshipPosition> getAllAdvertisedPositions(Company company) {
-		List<TraineeshipPosition> traineeshipPositions = traineeshipPositionDAO.findByCompany(company);
-		List<TraineeshipPosition> advertisedTraineeshipPositions = new ArrayList<TraineeshipPosition>();
-		for (TraineeshipPosition position: traineeshipPositions) {
-			if (!position.getIsAssigned()) {
-				advertisedTraineeshipPositions.add(position);
-			}
-		}
+		List<TraineeshipPosition> advertisedTraineeshipPositions = traineeshipPositionDAO.findByCompanyAndIsAssigned(company,false);;
 		return advertisedTraineeshipPositions;
 	}
 	

@@ -13,4 +13,5 @@ public interface TraineeshipPositionDAO extends JpaRepository<TraineeshipPositio
 	Optional<TraineeshipPosition> findById(Integer id);
 	List<TraineeshipPosition> findByCompany(Company company);
 	List<TraineeshipPosition> findByIsAssigned(Boolean isAssigned);
+	List<TraineeshipPosition> findByCompanyAndIsAssigned(Company company, Boolean isAssigned);
 }
