@@ -16,7 +16,6 @@ import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.Student;
 import myy803.traineeship.services.ProfessorService;
 import myy803.traineeship.services.StudentService;
-import myy803.traineeship.services.TraineeCommitteeService;
 import myy803.traineeship.services.TraineeshipPositionService;
 import myy803.traineeship.services.UserService;
 
@@ -25,9 +24,6 @@ public class TraineeshipCommitteeController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private TraineeCommitteeService traineeCommitteeService;
 	
 	@Autowired
 	private StudentService studentService;
@@ -46,7 +42,7 @@ public class TraineeshipCommitteeController {
 	@RequestMapping("/trainee_committee/students_applications")
 	public String displayPendingStudentsApplications(Model model) {
 		userService.authenticateAndGetUser();
-		List<Student> pendingStudents = traineeCommitteeService.getAllPendingStudents();
+		List<Student> pendingStudents = studentService.getAllPendingStudents();
 		model.addAttribute("studentsApplications", pendingStudents);
 		return "trainee_committee/students_applications";
 	}
@@ -54,7 +50,7 @@ public class TraineeshipCommitteeController {
 	@GetMapping("/trainee_committee/reject")
 	public String rejectStudent(@RequestParam("username") String username) {
 		Student student = studentService.getStudent(username);
-		traineeCommitteeService.rejectStudent(student);
+		studentService.rejectStudent(student);
 	    return "redirect:/trainee_committee/students_applications";
 	}
 	
@@ -68,7 +64,7 @@ public class TraineeshipCommitteeController {
 	@RequestMapping("/trainee_committee/find_position")
 	public String displayAvailablePositions(Model model) {
 	    userService.authenticateAndGetUser();
-	    List<TraineeshipPosition> availablePositions = traineeCommitteeService.getAvailablePositions();
+	    List<TraineeshipPosition> availablePositions = traineeshipPositionService.getAvailablePositions();
 	    model.addAttribute("availablePositions", availablePositions);
 	    return "trainee_committee/find_position";
 	}

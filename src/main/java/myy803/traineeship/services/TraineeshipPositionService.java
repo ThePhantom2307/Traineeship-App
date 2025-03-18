@@ -15,4 +15,5 @@ public interface TraineeshipPositionService {
 	List<TraineeshipPosition> getAllAdvertisedPositions(Company company);
 	void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position);
 	List<TraineeshipPosition> getAllInProgressPositions(Company company);
+	List<TraineeshipPosition> getAvailablePositions();
 }

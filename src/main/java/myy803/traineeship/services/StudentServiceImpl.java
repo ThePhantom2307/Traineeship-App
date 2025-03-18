@@ -1,5 +1,6 @@
 package myy803.traineeship.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,7 @@ public class StudentServiceImpl implements StudentService {
 		studentDAO.save(student);
 	}
 
-	@Override
-	public Boolean isStudentExists(String username) {
+	private Boolean isStudentExists(String username) {
 		Optional<Student> optStudent = studentDAO.findByUsername(username);
 		if (optStudent.isPresent()) {
 			return true;
@@ -63,5 +63,17 @@ public class StudentServiceImpl implements StudentService {
 				return "redirect:/student/traineeship_application?success=true";
 			}
 		} 
+	}
+	
+	@Override
+	public void rejectStudent(Student student) {
+		student.setLookingForTraineeship(false);
+		studentDAO.save(student);
+	}
+	
+	@Override
+	public List<Student> getAllPendingStudents() {
+		List<Student> pendingStudents = studentDAO.findByLookingForTraineeship(true);
+		return pendingStudents;
 	}
 }

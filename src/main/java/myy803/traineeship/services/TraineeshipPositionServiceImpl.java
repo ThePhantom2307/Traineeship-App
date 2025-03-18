@@ -67,6 +67,12 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		}
 		return advertisedTraineeshipPositions;
 	}
+	
+	@Override
+	public List<TraineeshipPosition> getAvailablePositions() {
+		List<TraineeshipPosition> availablePositions = traineeshipPositionDAO.findByIsAssigned(false);
+		return availablePositions;
+	}
 
 	@Override
 	public void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position) {

@@ -15,13 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import myy803.traineeship.services.UserServiceImpl;
-import myy803.traineeship.services.CompanyService;
-import myy803.traineeship.services.CompanyServiceImpl;
-import myy803.traineeship.services.ProfessorServiceImpl;
-import myy803.traineeship.services.StudentService;
-import myy803.traineeship.services.StudentServiceImpl;
-import myy803.traineeship.services.TraineeCommitteeServiceImpl;
-import myy803.traineeship.services.TraineeshipPositionServiceImpl;
 
 @Configuration
 @EnableWebSecurity
