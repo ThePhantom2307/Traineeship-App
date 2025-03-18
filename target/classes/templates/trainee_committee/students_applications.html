@@ -28,8 +28,8 @@
 				    <tr th:each="student : ${studentsApplications}">
 				        <td th:text="${student.fullname}"></td>
 				        <td th:text="${student.universityId}"></td>
-				        <td th:utext="${#strings.replace(student.skills, ', ', '<br>')}"></td>
-				        <td th:utext="${#strings.replace(student.interests, ', ', '<br>')}"></td>
+				        <td th:utext="${#strings.replace(student.skills, ', ', ',<br>')}"></td>
+				        <td th:utext="${#strings.replace(student.interests, ', ', ',<br>')}"></td>
 				        <td th:text="${student.preferredLocation}"></td>
 				        <td>
 				            <a th:href="@{/trainee_committee/accept(username=${student.username})}" class="btn btn-success">Accept</a>

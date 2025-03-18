@@ -58,8 +58,8 @@
                 <td th:text="${position.title}"></td>
                 <td th:text="${position.description}"></td>
                 <td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
-                <td th:utext="${#strings.replace(position.topics, ', ', '<br>')}"></td>
-                <td th:utext="${#strings.replace(position.skills, ', ', '<br>')}"></td>
+                <td th:utext="${#strings.replace(position.topics, ', ', ',<br>')}"></td>
+                <td th:utext="${#strings.replace(position.skills, ', ', ',<br>')}"></td>
                 <td th:text="${position.company.location}"></td>
                 <td>
 					<a th:href="@{/trainee_committee/select_position(position=${position.positionId}, student_username=${student.username})}" class="btn btn-success">Select</a>
