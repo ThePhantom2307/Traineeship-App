@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Student Position Logbook</title>
+</head>
+<body>
+    <div class="container">
+        <p class="h4 mb-4">Student Position Logbook</p>
+		<p th:if="${param.not_in_position}" style="color: red" class="errorMessage">You must create a profile to apply for traineeship!</p>
+		<p th:if="${param.changes_saved}" style="color: green" class="errorMessage">Changes saved!</p>
+        <form action="#" th:action="@{/student/save_logbook_changes}" th:object="${position}" method="POST">
+			<input type="hidden" th:field="*{positionId}" />
+			<input type="hidden" th:field="*{title}" />
+			<input type="hidden" th:field="*{description}" />
+			<input type="hidden" th:field="*{fromDate}" />
+			<input type="hidden" th:field="*{toDate}" />
+			<input type="hidden" th:field="*{topics}" />
+			<input type="hidden" th:field="*{skills}" />
+			<input type="hidden" th:field="*{isAssigned}" />
+			<input type="hidden" th:field="*{passFailGrade}" />
+			<input type="hidden" th:field="*{student}" />
+			<input type="hidden" th:field="*{supervisor}" />
+			<input type="hidden" th:field="*{company}" />
+			<input type="hidden" th:field="*{evaluations}" />
+			<textarea type="textarea" id="logbook" th:field="*{studentLogbook}" class="form-control"></textarea>
+			<br><br>
+            <button type="submit" class="btn btn-primary">Save Logbook</button>
+            <a th:href="@{/student/dashboard}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

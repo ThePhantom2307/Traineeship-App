@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import myy803.traineeship.model.Student;
+import myy803.traineeship.model.TraineeshipPosition;
 import myy803.traineeship.model.User;
 import myy803.traineeship.services.StudentService;
+import myy803.traineeship.services.TraineeshipPositionService;
 import myy803.traineeship.services.UserService;
 
 @Controller
@@ -17,6 +19,9 @@ public class StudentController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	TraineeshipPositionService traineeshipPositionService;
 	
 	@RequestMapping("/student/dashboard")
 	public String getStudentMainMenu(){
@@ -49,5 +54,24 @@ public class StudentController {
 	public String applyForTraineeship(@ModelAttribute("application") Student student) {
 	    String redirection = studentService.applyForTraineeship(student);
 	    return redirection;
+	}
+	
+	@RequestMapping("/student/logbook")
+	public String editLogbook(Model model) {
+		User user = userService.authenticateAndGetUser();
+		Student student = studentService.getStudent(user.getUsername());
+		TraineeshipPosition position = student.getTraineeshipPosition();
+		if (position != null) {
+			model.addAttribute("position", position);
+			return "student/logbook";
+		} else {
+			return "redirect:/student/logbook?not_in_position=true";
+		}
+	}
+	
+	@PostMapping("/student/save_logbook_changes")
+	public String saveLogbookChanges(@ModelAttribute("position") TraineeshipPosition position) {
+		traineeshipPositionService.savePosition(position);
+		return "redirect:/student/logbook?changes_saved=true";
 	}
 }

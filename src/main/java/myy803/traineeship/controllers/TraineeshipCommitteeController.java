@@ -4,6 +4,8 @@ package myy803.traineeship.controllers;
 import java.util.List;
 
 import myy803.traineeship.model.TraineeshipPosition;
+import myy803.traineeship.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,5 +131,13 @@ public class TraineeshipCommitteeController {
 	    TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
 	    traineeshipPositionService.assignStudentAndSupervisor(student, supervisor, position);
 	    return "redirect:/trainee_committee/students_applications";
+	}
+	
+	@RequestMapping("/trainee_committee/traineeships_in_progress")
+	public String traineeshipPositionsInProgres(Model model) {
+		userService.authenticateAndGetUser();
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositions();
+		model.addAttribute("positionsInProgress", positionsInProgress);
+		return "trainee_committee/traineeships_in_progress";
 	}
 }

@@ -13,10 +13,11 @@ public interface TraineeshipPositionService {
 	void savePosition(TraineeshipPosition traineeshipPosition);
 	void removePosition(Integer positionId);
 	TraineeshipPosition getTraineeshipPosition(Integer positionId);
-	List<TraineeshipPosition> getAllAdvertisedPositions(Company company);
+	List<TraineeshipPosition> getAllAdvertisedPositionsByCompany(Company company);
 	void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position);
 	List<TraineeshipPosition> getAllInProgressPositionsByCompany(Company company);
 	List<TraineeshipPosition> getAvailablePositions();
 	void evaluateStudent(Evaluation evaluation);
 	List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor);
+	List<TraineeshipPosition> getAllInProgressPositions();
 }

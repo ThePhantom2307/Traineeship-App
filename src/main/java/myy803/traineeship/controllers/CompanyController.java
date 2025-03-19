@@ -59,7 +59,7 @@ public class CompanyController {
 		User user = userService.authenticateAndGetUser();
 		String username = user.getUsername();
 		Company company = companyService.getCompanyByUsername(username);
-		List<TraineeshipPosition> advertisedPositions = traineeshipPositionService.getAllAdvertisedPositions(company);
+		List<TraineeshipPosition> advertisedPositions = traineeshipPositionService.getAllAdvertisedPositionsByCompany(company);
 		model.addAttribute("advertisedPositions", advertisedPositions);
 		return "company/available_positions";
 	}

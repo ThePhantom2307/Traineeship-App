@@ -56,7 +56,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 
 	@Override
-	public List<TraineeshipPosition> getAllAdvertisedPositions(Company company) {
+	public List<TraineeshipPosition> getAllAdvertisedPositionsByCompany(Company company) {
 		List<TraineeshipPosition> advertisedTraineeshipPositions = traineeshipPositionDAO.findByCompanyAndIsAssigned(company, false);
 		return advertisedTraineeshipPositions;
 	}
@@ -95,5 +95,11 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	public List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor) {
 		List<TraineeshipPosition> traineeshipPositionsInProgress = traineeshipPositionDAO.findBySupervisorAndIsAssigned(professor, true);
 		return traineeshipPositionsInProgress;
+	}
+
+	@Override
+	public List<TraineeshipPosition> getAllInProgressPositions() {
+		List<TraineeshipPosition> isAssignedPositions = traineeshipPositionDAO.findByIsAssigned(true);
+		return isAssignedPositions;
 	}
 }
