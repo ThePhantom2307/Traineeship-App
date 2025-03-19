@@ -18,4 +18,5 @@ public interface TraineeshipPositionService {
 	List<TraineeshipPosition> getAllInProgressPositionsByCompany(Company company);
 	List<TraineeshipPosition> getAvailablePositions();
 	void evaluateStudent(Evaluation evaluation);
+	List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor);
 }

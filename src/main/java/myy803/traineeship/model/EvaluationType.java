@@ -18,7 +18,7 @@ public enum EvaluationType {
 		return this.value.equals("Company");
 	}
 	
-	public Boolean isEvaluationProfessor() {
-		return this.value.equals("Professor");
+	public Boolean isEvaluationSupervisor() {
+		return this.value.equals("Supervisor");
 	}
 }

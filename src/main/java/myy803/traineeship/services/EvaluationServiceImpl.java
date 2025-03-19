@@ -37,13 +37,19 @@ public class EvaluationServiceImpl implements EvaluationService {
 	}
 
 	@Override
-	public Boolean hasCompanyEvaluate(TraineeshipPosition position) {
-		Optional<Evaluation> optCompanyEvaluation = evaluationDAO.findByEvaluationTypeAndTraineeshipPosition(EvaluationType.COMPANY, position);
-		if (optCompanyEvaluation.isPresent()) {
-			return true;
+	public Evaluation getSupervisorEvaluation(TraineeshipPosition position) {
+		Optional<Evaluation> optSupervisorEvaluation = evaluationDAO.findByEvaluationTypeAndTraineeshipPosition(EvaluationType.SUPERVISOR, position);
+		Evaluation supervisorEvaluation;
+		
+		if (optSupervisorEvaluation.isPresent()) {
+			supervisorEvaluation = optSupervisorEvaluation.get();
 		} else {
-			return false;
+			supervisorEvaluation = new Evaluation();
+			supervisorEvaluation.setEvaluationType(EvaluationType.SUPERVISOR);
+			position.addEvaluation(supervisorEvaluation);
 		}
+		
+		return supervisorEvaluation;
 	}
 
 }

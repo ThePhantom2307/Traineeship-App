@@ -90,4 +90,10 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 		position.addEvaluation(evaluation);
 		this.savePosition(position);
 	}
+
+	@Override
+	public List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor) {
+		List<TraineeshipPosition> traineeshipPositionsInProgress = traineeshipPositionDAO.findBySupervisorAndIsAssigned(professor, true);
+		return traineeshipPositionsInProgress;
+	}
 }
