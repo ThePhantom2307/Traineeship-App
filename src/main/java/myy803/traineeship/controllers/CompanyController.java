@@ -102,7 +102,7 @@ public class CompanyController {
 	
 	@GetMapping("/company/evaluate_student")
 	public String evaluateStudent(@RequestParam("position") Integer positionId, Model model) {
-	    TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
+		TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
 	    Evaluation evaluation = evaluationService.getCompanyEvaluation(position);
 	    model.addAttribute("evaluation", evaluation);
 	    return "company/evaluate_student";

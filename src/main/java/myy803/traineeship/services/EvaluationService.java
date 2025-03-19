@@ -5,4 +5,5 @@ import myy803.traineeship.model.TraineeshipPosition;
 
 public interface EvaluationService {
 	Evaluation getCompanyEvaluation(TraineeshipPosition position);
+	Boolean hasCompanyEvaluate(TraineeshipPosition position);
 }

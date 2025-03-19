@@ -13,4 +13,12 @@ public enum EvaluationType {
 	public String getValue() {
 		return this.value;
 	}
+	
+	public Boolean isEvaluationCompany() {
+		return this.value.equals("Company");
+	}
+	
+	public Boolean isEvaluationProfessor() {
+		return this.value.equals("Professor");
+	}
 }
