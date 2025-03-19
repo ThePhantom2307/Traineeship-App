@@ -95,7 +95,7 @@ public class CompanyController {
 		User user = userService.authenticateAndGetUser();
 		String username = user.getUsername();
 		Company company = companyService.getCompanyByUsername(username);
-		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositionsByCompany(company);
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllPositionsInProgressByCompany(company);
 		model.addAttribute("positionsInProgress", positionsInProgress);
 		return "company/positions_in_progress";
 	}

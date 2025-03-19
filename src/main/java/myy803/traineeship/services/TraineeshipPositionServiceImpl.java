@@ -79,7 +79,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 
 	@Override
-	public List<TraineeshipPosition> getAllInProgressPositionsByCompany(Company company) {
+	public List<TraineeshipPosition> getAllPositionsInProgressByCompany(Company company) {
 		List<TraineeshipPosition> traineeshipPositionsInProgress = traineeshipPositionDAO.findByCompanyAndIsAssigned(company, true);
 		return traineeshipPositionsInProgress;
 	}
@@ -92,14 +92,34 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 
 	@Override
-	public List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor) {
+	public List<TraineeshipPosition> getAllPositionsInProgressByProfessor(Professor professor) {
 		List<TraineeshipPosition> traineeshipPositionsInProgress = traineeshipPositionDAO.findBySupervisorAndIsAssigned(professor, true);
 		return traineeshipPositionsInProgress;
 	}
 
 	@Override
-	public List<TraineeshipPosition> getAllInProgressPositions() {
+	public List<TraineeshipPosition> getAllPositionsInProgress() {
 		List<TraineeshipPosition> isAssignedPositions = traineeshipPositionDAO.findByIsAssigned(true);
 		return isAssignedPositions;
 	}
+
+	@Override
+	public void passStudent(Integer positionId) {
+	    TraineeshipPosition position = this.getTraineeshipPosition(positionId);
+	    position.setPassFailGrade(true);
+	    position.getEvaluations().clear();
+	    this.savePosition(position);
+	    this.removePosition(positionId);
+	}
+
+	@Override
+	public void failStudent(Integer positionId) {
+	    TraineeshipPosition position = this.getTraineeshipPosition(positionId);
+	    position.setPassFailGrade(false);
+	    position.getEvaluations().clear();
+	    position.setEvaluations(null);
+	    this.savePosition(position);
+	    this.removePosition(positionId);
+	}
+
 }

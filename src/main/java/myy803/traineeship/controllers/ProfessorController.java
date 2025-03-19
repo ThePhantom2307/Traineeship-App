@@ -58,7 +58,7 @@ public class ProfessorController {
 		User user = userService.authenticateAndGetUser();
 		String username = user.getUsername();
 		Professor professor = professorService.getProfessor(username);
-		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositionsByProfessor(professor);
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllPositionsInProgressByProfessor(professor);
 		model.addAttribute("positionsInProgress", positionsInProgress);
 		return "professor/supervising_positions";
 	}

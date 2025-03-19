@@ -65,7 +65,7 @@ public class StudentController {
 			model.addAttribute("position", position);
 			return "student/logbook";
 		} else {
-			return "redirect:/student/logbook?not_in_position=true";
+			return "redirect:/student/dashboard?logbook_error=true";
 		}
 	}
 	

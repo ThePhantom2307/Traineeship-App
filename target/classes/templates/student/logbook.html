@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <p class="h4 mb-4">Student Position Logbook</p>
-		<p th:if="${param.not_in_position}" style="color: red" class="errorMessage">You must create a profile to apply for traineeship!</p>
 		<p th:if="${param.changes_saved}" style="color: green" class="errorMessage">Changes saved!</p>
         <form action="#" th:action="@{/student/save_logbook_changes}" th:object="${position}" method="POST">
 			<input type="hidden" th:field="*{positionId}" />

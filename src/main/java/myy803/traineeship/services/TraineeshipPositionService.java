@@ -15,9 +15,11 @@ public interface TraineeshipPositionService {
 	TraineeshipPosition getTraineeshipPosition(Integer positionId);
 	List<TraineeshipPosition> getAllAdvertisedPositionsByCompany(Company company);
 	void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position);
-	List<TraineeshipPosition> getAllInProgressPositionsByCompany(Company company);
+	List<TraineeshipPosition> getAllPositionsInProgressByCompany(Company company);
 	List<TraineeshipPosition> getAvailablePositions();
 	void evaluateStudent(Evaluation evaluation);
-	List<TraineeshipPosition> getAllInProgressPositionsByProfessor(Professor professor);
-	List<TraineeshipPosition> getAllInProgressPositions();
+	List<TraineeshipPosition> getAllPositionsInProgressByProfessor(Professor professor);
+	List<TraineeshipPosition> getAllPositionsInProgress();
+	void passStudent(Integer positionId);
+	void failStudent(Integer positionId);
 }

@@ -4,7 +4,6 @@ package myy803.traineeship.controllers;
 import java.util.List;
 
 import myy803.traineeship.model.TraineeshipPosition;
-import myy803.traineeship.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import myy803.traineeship.model.Evaluation;
+import myy803.traineeship.model.EvaluationType;
 import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.Student;
 import myy803.traineeship.services.ProfessorService;
@@ -124,8 +125,7 @@ public class TraineeshipCommitteeController {
 	@GetMapping("/trainee_committee/assign_student")
 	public String assignStudentToPosition(@RequestParam("position") Integer positionId,
 	                             @RequestParam("student_username") String studentUsername,
-	                             @RequestParam("professor_username") String professorUsername,
-	                             RedirectAttributes redirectAttributes) {
+	                             @RequestParam("professor_username") String professorUsername) {
 	    Student student = studentService.getStudent(studentUsername);
 	    Professor supervisor = professorService.getProfessor(professorUsername);
 	    TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
@@ -136,8 +136,37 @@ public class TraineeshipCommitteeController {
 	@RequestMapping("/trainee_committee/traineeships_in_progress")
 	public String traineeshipPositionsInProgres(Model model) {
 		userService.authenticateAndGetUser();
-		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllInProgressPositions();
+		List<TraineeshipPosition> positionsInProgress = traineeshipPositionService.getAllPositionsInProgress();
 		model.addAttribute("positionsInProgress", positionsInProgress);
 		return "trainee_committee/traineeships_in_progress";
+	}
+	
+	@GetMapping("/trainee_committee/review_evaluation")
+	public String reviewEvaluation(@RequestParam("position") Integer positionId, Model model) {
+	    TraineeshipPosition position = traineeshipPositionService.getTraineeshipPosition(positionId);
+	    List<Evaluation> evaluations = position.getEvaluations();
+	    
+	    for (Evaluation evaluation: evaluations) {
+	        if (evaluation.getEvaluationType() == EvaluationType.COMPANY) {
+	            model.addAttribute("companyEvaluation", evaluation);
+	        } else {
+	            model.addAttribute("supervisorEvaluation", evaluation);
+	        }
+	    }
+	    
+	    model.addAttribute("positionId", positionId);	    
+	    return "trainee_committee/review_evaluations";
+	}
+	
+	@GetMapping("/trainee_committee/pass_student")
+	public String passGradeStudent(@RequestParam("position") Integer positionId) {
+	    traineeshipPositionService.passStudent(positionId);
+	    return "redirect:/trainee_committee/traineeships_in_progress";
+	}
+	
+	@GetMapping("/trainee_committee/fail_student")
+	public String failGradeStudent(@RequestParam("position") Integer positionId) {
+	    traineeshipPositionService.failStudent(positionId);
+	    return "redirect:/trainee_committee/traineeships_in_progress";
 	}
 }

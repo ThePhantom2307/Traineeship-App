@@ -55,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
 		TraineeshipPosition assignedPosition = student.getTraineeshipPosition();
 		String username = student.getUsername();
 		Boolean isStudentLookingForTraineeship = student.getLookingForTraineeship();
+		
 		if (!this.isStudentExists(username)) {
 			return "redirect:/student/traineeship_application?error=true";
 		} else if (assignedPosition != null) {

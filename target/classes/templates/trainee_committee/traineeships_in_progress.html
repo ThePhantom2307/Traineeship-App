@@ -30,7 +30,7 @@
 					    <td th:text="${position.title}"></td>
 					    <td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
 						<td>
-							<a th:href="@{/trainee_committee/review_evaluations(position=${position.positionId})}" class="btn btn-success">Review Traineeship</a>
+							<a th:href="@{/trainee_committee/review_evaluation(position=${position.positionId})}" class="btn btn-success">Review Traineeship</a>
 						</td>
 					</tr>
                 </tbody>
