@@ -50,25 +50,41 @@ public class TraineeshipCommitteeController {
 		return "trainee_committee/students_applications";
 	}
 	
-	@GetMapping("/trainee_committee/reject")
+	@RequestMapping("/trainee_committee/reject")
 	public String rejectStudent(@RequestParam("username") String username) {
 		Student student = studentService.getStudent(username);
 		studentService.rejectStudent(student);
 	    return "redirect:/trainee_committee/students_applications";
 	}
 	
-	@GetMapping("/trainee_committee/accept")
+	@RequestMapping("/trainee_committee/accept")
 	public String acceptStudent(@RequestParam("username") String username, RedirectAttributes redirectAttributes) {
 	    Student student = studentService.getStudent(username);
 	    redirectAttributes.addFlashAttribute("student", student);
 	    return "redirect:/trainee_committee/find_position";
 	}
+	
+	@RequestMapping("/trainee_committee/search_positions")
+	public String searchPositions(@RequestParam("username") String username,
+	                              @RequestParam("search_option") String searchOption,
+	                              RedirectAttributes redirectAttributes) {
+	    Student student = studentService.getStudent(username);
+	    redirectAttributes.addFlashAttribute("student", student);
+	    redirectAttributes.addFlashAttribute("search_option", searchOption);
+	    return "redirect:/trainee_committee/find_position";
+	}
 
 	@RequestMapping("/trainee_committee/find_position")
 	public String displayAvailablePositions(Model model) {
-	    userService.authenticateAndGetUser();
-	    List<TraineeshipPosition> availablePositions = traineeshipPositionService.getAvailablePositions();
-	    model.addAttribute("availablePositions", availablePositions);
+	    if (model.containsAttribute("search_option")) {
+	        String searchOption = (String) model.asMap().get("search_option");
+	        Student student = (Student) model.asMap().get("student");
+	        List<TraineeshipPosition> availablePositions = traineeshipPositionService.getAvailablePositions(student, searchOption);
+	        model.addAttribute("availablePositions", availablePositions);
+	        model.addAttribute("searchPerformed", true);
+	    } else {
+	        model.addAttribute("searchPerformed", false);
+	    }
 	    return "trainee_committee/find_position";
 	}
 	
@@ -78,17 +94,13 @@ public class TraineeshipCommitteeController {
 	                             RedirectAttributes redirectAttributes) {
 	    Student student = studentService.getStudent(studentUsername);
 	    redirectAttributes.addFlashAttribute("student", student);
-	    redirectAttributes.addFlashAttribute("positionId", positionId);
+	    redirectAttributes.addFlashAttribute("position_id", positionId);
 	    return "redirect:/trainee_committee/find_supervisor";
 	}
-
 	
 	@RequestMapping("/trainee_committee/find_supervisor")
 	public String displayProfessors(Model model) {
-	    if (!model.containsAttribute("positionId") || !model.containsAttribute("student")) {
-	        throw new IllegalArgumentException("Required data is missing");
-	    }
-	    Integer positionId = (Integer) model.asMap().get("positionId");
+	    Integer positionId = (Integer) model.asMap().get("position_id");
 	    Student student = (Student) model.asMap().get("student");
 	    model.addAttribute("positionId", positionId);
 	    model.addAttribute("student", student);
@@ -97,7 +109,6 @@ public class TraineeshipCommitteeController {
 	    model.addAttribute("professors", professors);
 	    return "trainee_committee/find_supervisor";
 	}
-
 	
 	@GetMapping("/trainee_committee/select_supervisor")
 	public String selectSupervisor(@RequestParam("position") Integer positionId,

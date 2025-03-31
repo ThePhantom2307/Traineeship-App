@@ -52,21 +52,47 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public String applyForTraineeship(Student student) {
-		TraineeshipPosition assignedPosition = student.getTraineeshipPosition();
 		String username = student.getUsername();
-		Boolean isStudentLookingForTraineeship = student.getLookingForTraineeship();
 		
 		if (!this.isStudentExists(username)) {
 			return "redirect:/student/traineeship_application?error=true";
-		} else if (assignedPosition != null) {
+		} else if (hasStudentFinishedTheTraineeship(student)) {
+			return "redirect:/student/traineeship_application?traineeship_finished=true";
+		} else if (isStudentAssignedForTraineeship(student)) {
 			return "redirect:/student/traineeship_application?already_assigned=true";
-		} else if (isStudentLookingForTraineeship) {
+		} else if (isStudentLookingForTraineeship(student)) {
 			return "redirect:/student/traineeship_application?note=true";
 		} else {
 			student.setLookingForTraineeship(true);
 			this.saveStudent(student);
 			return "redirect:/student/traineeship_application?success=true";
 		}
+	}
+	
+	private Boolean hasStudentFinishedTheTraineeship(Student student) {
+		TraineeshipPosition assignedPosition = student.getTraineeshipPosition();
+		if (assignedPosition != null) {
+			Boolean passFailGrade = assignedPosition.getPassFailGrade();
+			if (passFailGrade != null) {
+				return true;
+			}
+			return false;
+		}
+		
+		return false;
+	}
+	
+	private Boolean isStudentAssignedForTraineeship(Student student) {
+		TraineeshipPosition assignedPosition = student.getTraineeshipPosition();
+		if (assignedPosition != null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private Boolean isStudentLookingForTraineeship(Student student) {
+		return student.getLookingForTraineeship();
 	}
 	
 	@Override

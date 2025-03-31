@@ -20,6 +20,7 @@
 						<th>Company Name</th>
                         <th>Position Title</th>
                         <th>Duration</th>
+						<th>Student Logbook</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
 					    <td th:text="${position.company.companyName}"></td>
 					    <td th:text="${position.title}"></td>
 					    <td th:text="|${#temporals.format(position.fromDate, 'dd/MM/yyyy')} - ${#temporals.format(position.toDate, 'dd/MM/yyyy')}|"></td>
+						<td th:text="${position.studentLogbook}"></td>
 						<td>
 							<a th:href="@{/trainee_committee/review_evaluation(position=${position.positionId})}" class="btn btn-success">Review Traineeship</a>
 						</td>

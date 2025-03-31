@@ -13,7 +13,7 @@
 		<h4>Logged as: <span sec:authentication="name"></span></h4>
 		<h4>Has role: <span sec:authentication="authorities"></span></h4>
 		<br><br><br>
-		<p th:if="${param.logbook_error}" style="color: red" class="errorMessage">You must create a profile to edit the logbook!</p>
+		<p th:if="${param.logbook_error}" style="color: red" class="errorMessage">You must be assigned to a position to edit the logbook!</p>
 		<br>		
 		<a th:href="@{/student/traineeship_application}" class="btn btn-primary btn-sm mb-3">Traineeship Application</a>
 		<a th:href="@{/student/logbook}" class="btn btn-primary btn-sm mb-3">Logbook</a>

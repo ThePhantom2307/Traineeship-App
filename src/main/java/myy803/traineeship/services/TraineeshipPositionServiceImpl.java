@@ -1,9 +1,11 @@
 package myy803.traineeship.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import myy803.traineeship.dao.TraineeshipPositionDAO;
@@ -12,12 +14,22 @@ import myy803.traineeship.model.Evaluation;
 import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
+import myy803.traineeship.searchstrategies.TraineeshipPositionSearchStrategy;
+
 
 @Service
 public class TraineeshipPositionServiceImpl implements TraineeshipPositionService {
 	
 	@Autowired
 	private TraineeshipPositionDAO traineeshipPositionDAO;
+	
+	@Autowired
+    @Qualifier("studentInterestsSearchStrategy")
+    private TraineeshipPositionSearchStrategy studentInterestsSearchStrategy;
+    
+    @Autowired
+    @Qualifier("studentLocationSearchStrategy")
+    private TraineeshipPositionSearchStrategy studentLocationSearchStrategy;
 	
 	@Override
 	public TraineeshipPosition getTraineeshipPosition(Integer positionId) {
@@ -62,11 +74,16 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 	
 	@Override
-	public List<TraineeshipPosition> getAvailablePositions() {
-		List<TraineeshipPosition> availablePositions = traineeshipPositionDAO.findByIsAssigned(false);
-		return availablePositions;
-	}
-
+    public List<TraineeshipPosition> getAvailablePositions(Student student, String searchOption) {
+        if ("interests".equalsIgnoreCase(searchOption)) {
+            return studentInterestsSearchStrategy.searchPositions(student);
+        } else if ("location".equalsIgnoreCase(searchOption)) {
+            return studentLocationSearchStrategy.searchPositions(student);
+        } else {
+            return new ArrayList<TraineeshipPosition>();
+        }
+    }
+	
 	@Override
 	public void assignStudentAndSupervisor(Student student, Professor supervisor, TraineeshipPosition position) {
 		position.setStudent(student);
@@ -99,7 +116,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 
 	@Override
 	public List<TraineeshipPosition> getAllPositionsInProgress() {
-		List<TraineeshipPosition> isAssignedPositions = traineeshipPositionDAO.findByIsAssigned(true);
+		List<TraineeshipPosition> isAssignedPositions = traineeshipPositionDAO.findByIsAssignedAndPassFailGrade(true, null);
 		return isAssignedPositions;
 	}
 
@@ -107,19 +124,14 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	public void passStudent(Integer positionId) {
 	    TraineeshipPosition position = this.getTraineeshipPosition(positionId);
 	    position.setPassFailGrade(true);
-	    position.getEvaluations().clear();
 	    this.savePosition(position);
-	    this.removePosition(positionId);
 	}
 
 	@Override
 	public void failStudent(Integer positionId) {
 	    TraineeshipPosition position = this.getTraineeshipPosition(positionId);
 	    position.setPassFailGrade(false);
-	    position.getEvaluations().clear();
-	    position.setEvaluations(null);
 	    this.savePosition(position);
-	    this.removePosition(positionId);
 	}
 
 }
