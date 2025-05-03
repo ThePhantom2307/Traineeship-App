@@ -1,4 +1,4 @@
-package myy803.traineeship.searchstrategies;
+package myy803.traineeship.searchstrategies.positions;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ public class StudentInterestsAndLocationSearchStrategy extends TraineeshipPositi
 
     @Autowired
     private StudentInterestsSearchStrategy interestsStrategy;
-    
+
     @Override
     protected List<TraineeshipPosition> searchPositions(Student student) {
-        List<TraineeshipPosition> locationFiltered = locationStrategy.searchPositions(student);
-        List<TraineeshipPosition> interestsFiltered = interestsStrategy.searchPositions(student);
-        locationFiltered.retainAll(interestsFiltered);
-        return locationFiltered;
+        List<TraineeshipPosition> locationMatches = locationStrategy.searchPositions(student);
+        List<TraineeshipPosition> interestMatches = interestsStrategy.searchPositions(student);        
+        interestMatches.retainAll(locationMatches);
+        return interestMatches;
     }
 }

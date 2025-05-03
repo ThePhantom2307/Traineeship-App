@@ -1,4 +1,4 @@
-package myy803.traineeship.searchstrategies;
+package myy803.traineeship.searchstrategies.positions;
 
 import java.util.List;
 

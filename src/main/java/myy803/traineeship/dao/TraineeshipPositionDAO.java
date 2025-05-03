@@ -17,4 +17,5 @@ public interface TraineeshipPositionDAO extends JpaRepository<TraineeshipPositio
 	List<TraineeshipPosition> findByIsAssignedAndPassFailGrade(Boolean isAssigned, Boolean passFailGrade);
 	List<TraineeshipPosition> findByCompanyAndIsAssigned(Company company, Boolean isAssigned);
 	List<TraineeshipPosition> findBySupervisorAndIsAssigned(Professor professor, Boolean isAssigned);
+	Integer countBySupervisorAndIsAssigned(Professor supervisor, boolean isAssigned);
 }

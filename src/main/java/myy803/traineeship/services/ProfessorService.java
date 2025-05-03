@@ -8,5 +8,5 @@ public interface ProfessorService {
 	void saveProfessor(Professor professor);
 	Boolean isProfessorExists(String username);
 	Professor getProfessor(String username);
-	List<Professor> getAllProfessors();
+	List<Professor> searchAndRetrieveMatchingSupervisors(Integer positionId, String searchOption);
 }

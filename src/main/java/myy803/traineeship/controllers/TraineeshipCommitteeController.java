@@ -79,7 +79,7 @@ public class TraineeshipCommitteeController {
 	    if (model.containsAttribute("search_option")) {
 	        String searchOption = (String) model.asMap().get("search_option");
 	        Student student = (Student) model.asMap().get("student");
-	        List<TraineeshipPosition> availablePositions = traineeshipPositionService.searchAndRetrieveAvailablePositions(student, searchOption);
+	        List<TraineeshipPosition> availablePositions = traineeshipPositionService.searchAndRetrieveMatchingPositions(student, searchOption);
 	        model.addAttribute("availablePositions", availablePositions);
 	        model.addAttribute("searchPerformed", true);
 	    } else {
@@ -98,16 +98,33 @@ public class TraineeshipCommitteeController {
 	    return "redirect:/trainee_committee/find_supervisor";
 	}
 	
+	@RequestMapping("/trainee_committee/search_supervisors")
+	public String searchSupervisors(@RequestParam("student_username") String studnetUsername,
+	                              @RequestParam("search_option") String searchOption,
+	                              @RequestParam("position_id") Integer positionId,
+	                              RedirectAttributes redirectAttributes) {
+	    Student student = studentService.getStudent(studnetUsername);
+	    redirectAttributes.addFlashAttribute("student", student);
+	    redirectAttributes.addFlashAttribute("search_option", searchOption);
+	    redirectAttributes.addFlashAttribute("position_id", positionId);
+	    return "redirect:/trainee_committee/find_supervisor";
+	}
+	
 	@RequestMapping("/trainee_committee/find_supervisor")
 	public String displayProfessors(Model model) {
-	    Integer positionId = (Integer) model.asMap().get("position_id");
-	    Student student = (Student) model.asMap().get("student");
-	    model.addAttribute("positionId", positionId);
-	    model.addAttribute("student", student);
-	    
-	    List<Professor> professors = professorService.getAllProfessors();
-	    model.addAttribute("professors", professors);
-	    return "trainee_committee/find_supervisor";
+		if (model.containsAttribute("search_option")) {
+			String searchOption = (String) model.asMap().get("search_option");
+		    Integer positionId = (Integer) model.asMap().get("position_id");
+		    Student student = (Student) model.asMap().get("student");
+		    model.addAttribute("position_id", positionId);
+		    model.addAttribute("student", student);
+		    List<Professor> professors = professorService.searchAndRetrieveMatchingSupervisors(positionId, searchOption);
+		    model.addAttribute("professors", professors);
+		    model.addAttribute("searchPerformed", true);
+		} else {
+			model.addAttribute("searchPerformed", false);
+		}
+		return "trainee_committee/find_supervisor";
 	}
 	
 	@GetMapping("/trainee_committee/select_supervisor")

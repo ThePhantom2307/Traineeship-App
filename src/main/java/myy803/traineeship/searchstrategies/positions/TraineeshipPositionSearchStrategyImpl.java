@@ -1,4 +1,4 @@
-package myy803.traineeship.searchstrategies;
+package myy803.traineeship.searchstrategies.positions;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ public abstract class TraineeshipPositionSearchStrategyImpl implements Traineesh
         return matchingPositions;
     }
     
-    private Set<String> parseCommaSeparatedString(String value) {
+    protected Set<String> parseCommaSeparatedString(String value) {
         Set<String> result = new HashSet<>();
         if (value == null || value.isEmpty()) {
             return result;

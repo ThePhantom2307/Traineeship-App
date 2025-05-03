@@ -38,6 +38,24 @@
 		</div>
 	</div>
 
+	<form th:action="@{/trainee_committee/search_supervisors}" method="get">
+	    <input type="hidden" name="student_username" th:value="${student.username}" />
+		<input type="hidden" name="position_id" th:value="${position_id}" />
+	    <div class="row mb-3">
+	        <div class="col">
+	            <div class="form-check form-check-inline">
+	                <input class="form-check-input" type="radio" name="search_option" id="option1" value="interests">
+	                <label class="form-check-label" for="option1">Search by Interests</label>
+	            </div>
+	            <div class="form-check form-check-inline">
+	                <input class="form-check-input" type="radio" name="search_option" id="option2" value="load">
+	                <label class="form-check-label" for="option2">Search by Load</label>
+	            </div>
+	            <button type="submit" id="searchButton" class="btn btn-primary ml-2" disabled>Search</button>
+	        </div>
+	    </div>
+	</form>
+	
     <div class="table">
         <table class="table table-striped table-hover table-bordered">
             <thead class="thead-dark">
@@ -52,7 +70,7 @@
                 <td th:text="${professor.fullname}"></td>
                 <td th:text="${professor.interests}"></td>
                 <td>
-					<a th:href="@{/trainee_committee/select_supervisor(position=${positionId}, student_username=${student.username}, professor_username=${professor.username})}" 
+					<a th:href="@{/trainee_committee/select_supervisor(position=${position_id}, student_username=${student.username}, professor_username=${professor.username})}" 
 					   class="btn btn-success">Select</a>
 				</td>
             </tr>
@@ -60,6 +78,21 @@
         </table>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const radioButtons = document.getElementsByName('search_option');
+    const searchButton = document.getElementById('searchButton');
+
+    radioButtons.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (document.querySelector('input[name="search_option"]:checked')) {
+                searchButton.disabled = false;
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
 

@@ -14,7 +14,7 @@ import myy803.traineeship.model.Evaluation;
 import myy803.traineeship.model.Professor;
 import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
-import myy803.traineeship.searchstrategies.TraineeshipPositionSearchStrategy;
+import myy803.traineeship.searchstrategies.positions.TraineeshipPositionSearchStrategy;
 
 
 @Service
@@ -32,7 +32,7 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
     private TraineeshipPositionSearchStrategy studentLocationSearchStrategy;
     
     @Autowired
-    @Qualifier("studentLocationSearchStrategy")
+    @Qualifier("studentInterestsAndLocationSearchStrategy")
     private TraineeshipPositionSearchStrategy studentInterestsAndLocationSearchStrategy;
 	
 	@Override
@@ -78,15 +78,13 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 	
 	@Override
-    public List<TraineeshipPosition> searchAndRetrieveAvailablePositions(Student student, String searchOption) {
+    public List<TraineeshipPosition> searchAndRetrieveMatchingPositions(Student student, String searchOption) {
         if ("interests".equalsIgnoreCase(searchOption)) {
             return studentInterestsSearchStrategy.exectuteSearchForPositions(student);
         } else if ("location".equalsIgnoreCase(searchOption)) {
             return studentLocationSearchStrategy.exectuteSearchForPositions(student);
-        } else if ("both".equalsIgnoreCase(searchOption)) {
-        	return studentInterestsAndLocationSearchStrategy.exectuteSearchForPositions(student);
         } else {
-            return new ArrayList<TraineeshipPosition>();
+        	return studentInterestsAndLocationSearchStrategy.exectuteSearchForPositions(student);
         }
     }
 	

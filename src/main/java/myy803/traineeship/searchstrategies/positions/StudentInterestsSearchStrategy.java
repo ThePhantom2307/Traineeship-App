@@ -1,4 +1,4 @@
-package myy803.traineeship.searchstrategies;
+package myy803.traineeship.searchstrategies.positions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,21 +40,6 @@ public class StudentInterestsSearchStrategy extends TraineeshipPositionSearchStr
         }
         
         return matchingPositions;
-    }
-
-    private Set<String> parseCommaSeparatedString(String value) {
-        if (value == null || value.isEmpty()) {
-            return Collections.emptySet();
-        }
-        String[] parts = value.split(",");
-        Set<String> result = new java.util.HashSet<>();
-        for (String part : parts) {
-            String normalized = part.trim().toLowerCase();
-            if (!normalized.isEmpty()) {
-                result.add(normalized);
-            }
-        }
-        return result;
     }
 
     private int countCommonInterests(Set<String> studentInterests, Set<String> topicsSet) {
