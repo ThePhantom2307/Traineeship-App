@@ -6,5 +6,5 @@ import myy803.traineeship.model.Student;
 import myy803.traineeship.model.TraineeshipPosition;
 
 public interface TraineeshipPositionSearchStrategy {
-	List<TraineeshipPosition> searchPositions(Student student);
+	List<TraineeshipPosition> exectuteSearchForPositions(Student student);
 }

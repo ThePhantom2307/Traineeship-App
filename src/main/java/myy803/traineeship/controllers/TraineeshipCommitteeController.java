@@ -79,7 +79,7 @@ public class TraineeshipCommitteeController {
 	    if (model.containsAttribute("search_option")) {
 	        String searchOption = (String) model.asMap().get("search_option");
 	        Student student = (Student) model.asMap().get("student");
-	        List<TraineeshipPosition> availablePositions = traineeshipPositionService.getAvailablePositions(student, searchOption);
+	        List<TraineeshipPosition> availablePositions = traineeshipPositionService.searchAndRetrieveAvailablePositions(student, searchOption);
 	        model.addAttribute("availablePositions", availablePositions);
 	        model.addAttribute("searchPerformed", true);
 	    } else {

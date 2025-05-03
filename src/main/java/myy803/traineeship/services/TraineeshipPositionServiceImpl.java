@@ -30,6 +30,10 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
     @Autowired
     @Qualifier("studentLocationSearchStrategy")
     private TraineeshipPositionSearchStrategy studentLocationSearchStrategy;
+    
+    @Autowired
+    @Qualifier("studentLocationSearchStrategy")
+    private TraineeshipPositionSearchStrategy studentInterestsAndLocationSearchStrategy;
 	
 	@Override
 	public TraineeshipPosition getTraineeshipPosition(Integer positionId) {
@@ -74,11 +78,13 @@ public class TraineeshipPositionServiceImpl implements TraineeshipPositionServic
 	}
 	
 	@Override
-    public List<TraineeshipPosition> getAvailablePositions(Student student, String searchOption) {
+    public List<TraineeshipPosition> searchAndRetrieveAvailablePositions(Student student, String searchOption) {
         if ("interests".equalsIgnoreCase(searchOption)) {
-            return studentInterestsSearchStrategy.searchPositions(student);
+            return studentInterestsSearchStrategy.exectuteSearchForPositions(student);
         } else if ("location".equalsIgnoreCase(searchOption)) {
-            return studentLocationSearchStrategy.searchPositions(student);
+            return studentLocationSearchStrategy.exectuteSearchForPositions(student);
+        } else if ("both".equalsIgnoreCase(searchOption)) {
+        	return studentInterestsAndLocationSearchStrategy.exectuteSearchForPositions(student);
         } else {
             return new ArrayList<TraineeshipPosition>();
         }
