@@ -18,11 +18,20 @@ import myy803.traineeship.services.*;
 @ExtendWith(MockitoExtension.class)
 class TraineeshipCommitteeControllerTest {
 
-    @Mock private UserService userService;
-    @Mock private ProfessorService professorService;
-    @Mock private StudentService studentService;
-    @Mock private TraineeshipPositionService positionService;
-    @InjectMocks private TraineeshipCommitteeController controller;
+    @Mock
+    private UserService userService;
+    
+    @Mock
+    private ProfessorService professorService;
+    
+    @Mock
+    private StudentService studentService;
+    
+    @Mock
+    private TraineeshipPositionService positionService;
+    
+    @InjectMocks
+    private TraineeshipCommitteeController controller;
 
     @Test
     void dashboard_viewName() {

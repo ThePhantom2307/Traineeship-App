@@ -15,8 +15,11 @@ import myy803.traineeship.services.UserService;
 @ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
 
-    @Mock  private UserService userService;
-    @InjectMocks private AuthController controller;
+    @Mock 
+    private UserService userService;
+    
+    @InjectMocks
+    private AuthController controller;
 
     @Test
     void login_returnsLoginView() {

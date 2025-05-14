@@ -17,11 +17,20 @@ import myy803.traineeship.services.*;
 @ExtendWith(MockitoExtension.class)
 class ProfessorControllerTest {
 
-    @Mock private UserService userService;
-    @Mock private ProfessorService professorService;
-    @Mock private TraineeshipPositionService positionService;
-    @Mock private EvaluationService evaluationService;
-    @InjectMocks private ProfessorController controller;
+    @Mock 
+    private UserService userService;
+    
+    @Mock
+    private ProfessorService professorService;
+    
+    @Mock
+    private TraineeshipPositionService positionService;
+    
+    @Mock
+    private EvaluationService evaluationService;
+    
+    @InjectMocks
+    private ProfessorController controller;
 
     private User user;
     private Professor professor;

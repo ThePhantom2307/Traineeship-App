@@ -15,11 +15,20 @@ import myy803.traineeship.services.*;
 @ExtendWith(MockitoExtension.class)
 class CompanyControllerTest {
 
-    @Mock private UserService userService;
-    @Mock private CompanyService companyService;
-    @Mock private TraineeshipPositionService positionService;
-    @Mock private EvaluationService evaluationService;
-    @InjectMocks private CompanyController controller;
+    @Mock
+    private UserService userService;
+    
+    @Mock
+    private CompanyService companyService;
+    
+    @Mock
+    private TraineeshipPositionService positionService;
+    
+    @Mock
+    private EvaluationService evaluationService;
+    
+    @InjectMocks
+    private CompanyController controller;
 
     private User user;
     private Company company;

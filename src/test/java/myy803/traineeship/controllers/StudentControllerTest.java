@@ -15,10 +15,15 @@ import myy803.traineeship.services.*;
 @ExtendWith(MockitoExtension.class)
 class StudentControllerTest {
 
-    @Mock private UserService userService;
-    @Mock private StudentService studentService;
+    @Mock
+    private UserService userService;
+    @Mock
+    private StudentService studentService;
+    
     @Mock private TraineeshipPositionService positionService;
-    @InjectMocks private StudentController controller;
+    
+    @InjectMocks
+    private StudentController controller;
 
     private User user;
     private Student student;

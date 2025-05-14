@@ -24,10 +24,17 @@ import myy803.traineeship.searchstrategies.positions.TraineeshipPositionSearchSt
 @ExtendWith(MockitoExtension.class)
 class TraineeshipPositionServiceImplTest {
 
-    @Mock private TraineeshipPositionDAO traineeshipPositionDAO;
-    @Mock private TraineeshipPositionSearchStrategy studentInterestsSearchStrategy;
-    @Mock private TraineeshipPositionSearchStrategy studentLocationSearchStrategy;
-    @Mock private TraineeshipPositionSearchStrategy studentInterestsAndLocationSearchStrategy;
+    @Mock
+    private TraineeshipPositionDAO traineeshipPositionDAO;
+    
+    @Mock
+    private TraineeshipPositionSearchStrategy studentInterestsSearchStrategy;
+    
+    @Mock
+    private TraineeshipPositionSearchStrategy studentLocationSearchStrategy;
+    
+    @Mock
+    private TraineeshipPositionSearchStrategy studentInterestsAndLocationSearchStrategy;
 
     @InjectMocks
     private TraineeshipPositionServiceImpl sut;
