@@ -19,7 +19,7 @@ public abstract class TraineeshipPositionSearchStrategyImpl implements Traineesh
     
     protected abstract List<TraineeshipPosition> searchPositions(Student student);
 
-    private List<TraineeshipPosition> filterPositionsBySkills(List<TraineeshipPosition> positions, Student student) {
+    protected List<TraineeshipPosition> filterPositionsBySkills(List<TraineeshipPosition> positions, Student student) {
         String skillsString = student.getSkills();
         Set<String> studentSkills = parseCommaSeparatedString(skillsString);
 

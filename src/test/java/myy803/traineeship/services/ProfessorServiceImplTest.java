@@ -19,7 +19,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceImplTest {
 
-    // === SETUP ===
     @Mock
     private ProfessorDAO professorDAO;
 
@@ -31,14 +30,14 @@ public class ProfessorServiceImplTest {
 
     @Mock
     private SupervisorSearchStrategy supervisorLoadSearchStrategy;
+    
     @InjectMocks
-    private ProfessorServiceImpl professorService;
+    private ProfessorService professorService = new ProfessorServiceImpl();
 
-    // === TEST 1: saveProfessor ===
     @Test
     public void testSaveProfessor() {
         Professor p = new Professor();
-        p.setUsername("prof_x");
+        p.setUsername("test_username");
 
         professorService.saveProfessor(p);
 

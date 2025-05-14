@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
 		studentDAO.save(student);
 	}
 
-	private Boolean isStudentExists(String username) {
+	public Boolean doesStudentExist(String username) {
 		Optional<Student> optStudent = studentDAO.findByUsername(username);
 		if (optStudent.isPresent()) {
 			return true;
@@ -54,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
 	public String applyForTraineeship(Student student) {
 		String username = student.getUsername();
 		
-		if (!this.isStudentExists(username)) {
+		if (!this.doesStudentExist(username)) {
 			return "redirect:/student/traineeship_application?error=true";
 		} else if (hasStudentFinishedTheTraineeship(student)) {
 			return "redirect:/student/traineeship_application?traineeship_finished=true";

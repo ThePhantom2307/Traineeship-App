@@ -1,7 +1,6 @@
 package myy803.traineeship.services;
 
 import myy803.traineeship.dao.EvaluationDAO;
-import myy803.traineeship.dao.TraineeshipPositionDAO;
 import myy803.traineeship.model.Evaluation;
 import myy803.traineeship.model.EvaluationType;
 import myy803.traineeship.model.TraineeshipPosition;

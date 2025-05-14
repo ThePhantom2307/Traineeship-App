@@ -1,6 +1,5 @@
 package myy803.traineeship.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
