@@ -36,13 +36,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 	}
 	
 	@Override
-	public Boolean isProfessorExists(String username) {
+	public Boolean doesProfessorExists(String username) {
 		Optional<Professor> student = professorDAO.findByUsername(username);
-		if (student.isPresent()) {
-			return true;
-		}
-		return false;
-	}
+        return student.isPresent();
+    }
 	
 	@Override
 	public Professor getProfessor(String username) {
@@ -71,4 +68,6 @@ public class ProfessorServiceImpl implements ProfessorService{
 			return supervisorLoadSearchStrategy.executeSearchForSupervisors(selectedPosition);
 		}
 	}
+
+
 }
