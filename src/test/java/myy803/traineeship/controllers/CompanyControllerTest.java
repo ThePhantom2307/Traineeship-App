@@ -35,8 +35,10 @@ class CompanyControllerTest {
 
     @BeforeEach
     void init() {
-        user = new User(); user.setUsername("acme");
-        company = new Company(); company.setUsername("acme");
+        user = new User();
+        user.setUsername("test_username");
+        company = new Company();
+        company.setUsername("test_username");
     }
 
     @Test
@@ -47,7 +49,7 @@ class CompanyControllerTest {
     @Test
     void getOrCreateProfile_addsProfileToModel() {
         when(userService.authenticateAndGetUser()).thenReturn(user);
-        when(companyService.getCompanyByUsername("acme")).thenReturn(company);
+        when(companyService.getCompanyByUsername("test_username")).thenReturn(company);
         ConcurrentModel model = new ConcurrentModel();
 
         String view = controller.getOrCreateProfile(model);
@@ -67,8 +69,8 @@ class CompanyControllerTest {
     @Test
     void createNewPosition_whenCompanyExists_returnsForm() {
         when(userService.authenticateAndGetUser()).thenReturn(user);
-        when(companyService.isCompanyExists("acme")).thenReturn(true);
-        when(companyService.getCompanyByUsername("acme")).thenReturn(company);
+        when(companyService.isCompanyExists("test_username")).thenReturn(true);
+        when(companyService.getCompanyByUsername("test_username")).thenReturn(company);
         TraineeshipPosition pos = new TraineeshipPosition();
         when(positionService.createNewTraineeshipPosition(company)).thenReturn(pos);
         ConcurrentModel model = new ConcurrentModel();
@@ -82,7 +84,7 @@ class CompanyControllerTest {
     @Test
     void createNewPosition_whenCompanyMissing_redirectsWithError() {
         when(userService.authenticateAndGetUser()).thenReturn(user);
-        when(companyService.isCompanyExists("acme")).thenReturn(false);
+        when(companyService.isCompanyExists("test_username")).thenReturn(false);
         ConcurrentModel model = new ConcurrentModel();
 
         String view = controller.createNewPosition(model);

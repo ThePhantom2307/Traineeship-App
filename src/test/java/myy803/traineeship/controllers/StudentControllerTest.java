@@ -17,6 +17,7 @@ class StudentControllerTest {
 
     @Mock
     private UserService userService;
+    
     @Mock
     private StudentService studentService;
     
@@ -30,8 +31,10 @@ class StudentControllerTest {
 
     @BeforeEach
     void init() {
-        user = new User(); user.setUsername("stud1");
-        student = new Student(); student.setUsername("stud1");
+        user = new User();
+        user.setUsername("test_username");
+        student = new Student();
+        student.setUsername("test_username");
     }
 
     @Test
@@ -42,7 +45,7 @@ class StudentControllerTest {
     @Test
     void getProfile_populatesModel() {
         when(userService.authenticateAndGetUser()).thenReturn(user);
-        when(studentService.getStudent("stud1")).thenReturn(student);
+        when(studentService.getStudent("test_username")).thenReturn(student);
         ConcurrentModel model = new ConcurrentModel();
 
         String view = controller.getProfile(model);
@@ -62,7 +65,7 @@ class StudentControllerTest {
     @Test
     void applyForTraineeship_returnsForm() {
         when(userService.authenticateAndGetUser()).thenReturn(user);
-        when(studentService.getStudent("stud1")).thenReturn(student);
+        when(studentService.getStudent("test_username")).thenReturn(student);
         ConcurrentModel model = new ConcurrentModel();
 
         String view = controller.applyForTraineeship(model);

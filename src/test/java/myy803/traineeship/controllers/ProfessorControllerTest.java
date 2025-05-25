@@ -37,8 +37,10 @@ class ProfessorControllerTest {
 
     @BeforeEach
     void init() {
-        user = new User(); user.setUsername("prof1");
-        professor = new Professor(); professor.setUsername("prof1");
+        user = new User();
+        user.setUsername("prof1");
+        professor = new Professor();
+        professor.setUsername("prof1");
     }
 
     @Test
