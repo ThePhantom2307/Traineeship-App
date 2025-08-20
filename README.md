@@ -39,6 +39,7 @@ Traineeship-App is a Spring Boot web application that manages the full lifecycle
    git clone https://github.com/ThePhantom2307/Traineeship-App.git
    cd Traineeship-App
    ```
-  2.  Update database credentials in  `src/main/resources/application.properties`  to match your local MySQL instance.
+   
+2.  Update database credentials in  `src/main/resources/application.properties`  to match your local MySQL instance.
     
 3.  (Optional) Import the provided SQL scripts (`myy803_traineeship.sql`,  `myy803_traineeship-static.sql`) to pre-populate the database.
